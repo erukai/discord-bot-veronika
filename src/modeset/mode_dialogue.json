@@ -1,0 +1,50 @@
+{
+    "master" : {
+
+        "HELP" : {
+            "help_text" : "What can I help you with, Master? ♡"
+        },
+
+        "INFO" : {
+            
+        },
+
+        "JAPANESE" : {
+            
+        },
+
+        "MASTERONLY" : {
+
+        },
+
+        "MISC" : {
+            "hello": "Hello, Master!"
+        }
+
+    },
+
+    "normal" : {
+
+        "HELP" : {
+            "help_text" : "What can I help you with?"
+        },
+
+        "INFO" : {
+
+        },
+
+        "JAPANESE" : {
+            
+        },
+
+        "MASTERONLY" : {
+
+        },
+
+        "MISC" : {
+            "hello": "Hello!"
+        }
+
+    }
+    
+}

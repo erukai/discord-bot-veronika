@@ -1,0 +1,506 @@
+{
+    "爆乳": {
+        "word": "爆乳",
+        "romaji": "baku-nyuu",
+        "role": "n",
+        "meaning": "huge breasts, big chest",
+        "kanji": "bomb, milk",
+        "note": "",
+        "timestamp": "04-11-2025 02:53"
+    },
+    "貧乳": {
+        "word": "貧乳",
+        "romaji": "hin-nyuu",
+        "role": "n",
+        "meaning": "tiny breasts, small chest",
+        "kanji": "poverty, milk",
+        "note": "",
+        "timestamp": "04-11-2025 02:54"
+    },
+    "領域": {
+        "word": "領域",
+        "romaji": "ryou-iki",
+        "role": "n",
+        "meaning": "domain, territory",
+        "kanji": "jurisdiction, range",
+        "note": "",
+        "timestamp": "04-11-2025 03:13"
+    },
+    "ご注文": {
+        "word": "ご注文",
+        "romaji": "go.chuu-mon",
+        "role": "n, v",
+        "meaning": "order, to order (polite)",
+        "kanji": "poor, sentence",
+        "note": "",
+        "timestamp": "04-11-2025 09:35"
+    },
+    "嗅がす": {
+        "word": "嗅がす",
+        "romaji": "ka.gasu",
+        "role": "v",
+        "meaning": "to smell, to sniff",
+        "kanji": "scent",
+        "note": "",
+        "timestamp": "04-11-2025 09:36"
+    },
+    "得意": {
+        "word": "得意",
+        "romaji": "to-kui",
+        "role": "adj",
+        "meaning": "strong point / good at, specialty, pride / triumphant",
+        "kanji": "gain, idea",
+        "note": "",
+        "timestamp": "04-11-2025 09:52"
+    },
+    "音階": {
+        "word": "音階",
+        "romaji": "on-kai",
+        "role": "n",
+        "meaning": "scale (music)",
+        "kanji": "sound, storey",
+        "note": "",
+        "timestamp": "04-11-2025 09:53"
+    },
+    "発情": {
+        "word": "発情",
+        "romaji": "hatsu.jou",
+        "role": "n, v",
+        "meaning": "horniness, sexual excitement, to be horny",
+        "kanji": "departure, feelings",
+        "note": "",
+        "timestamp": "04-11-2025 15:22"
+    },
+    "責任": {
+        "word": "責任",
+        "romaji": "seki-nin",
+        "role": "n",
+        "meaning": "responsibility / duty, liability",
+        "kanji": "blame, responsibility",
+        "note": "",
+        "timestamp": "04-11-2025 15:30"
+    },
+    "散歩": {
+        "word": "散歩",
+        "romaji": "san-po",
+        "role": "n, v",
+        "meaning": "walk / stroll, to take a walk / to take a stroll",
+        "kanji": "scatter, walk",
+        "note": "",
+        "timestamp": "04-11-2025 15:42"
+    },
+    "ご褒美": {
+        "word": "ご褒美",
+        "romaji": "go.hou-bi",
+        "role": "n",
+        "meaning": "reward, prize",
+        "kanji": "praise, beauty",
+        "note": "",
+        "timestamp": "04-11-2025 15:45"
+    },
+    "お八つ": {
+        "word": "お八つ",
+        "romaji": "o.ya.tsu",
+        "role": "n",
+        "meaning": "snack",
+        "kanji": "eight",
+        "note": "",
+        "timestamp": "04-11-2025 15:50"
+    },
+    "促す": {
+        "word": "促す",
+        "romaji": "unaga.su",
+        "role": "v",
+        "meaning": "to urge, to encourage, to stimulate",
+        "kanji": "stimulate",
+        "note": "",
+        "timestamp": "04-11-2025 15:54"
+    },
+    "抱き締める": {
+        "word": "抱き締める",
+        "romaji": "da.ki-shi.meru",
+        "role": "v, cpv",
+        "meaning": "to hug, to embrace, to cuddle",
+        "kanji": "embrace, tighten",
+        "note": "",
+        "timestamp": "04-11-2025 15:55"
+    },
+    "素直": {
+        "word": "素直",
+        "romaji": "su-nao",
+        "role": "adj, n",
+        "meaning": "obedient, honest",
+        "kanji": "elementary, straightaway",
+        "note": "",
+        "timestamp": "04-11-2025 15:57"
+    },
+    "現実": {
+        "word": "現実",
+        "romaji": "gen-jitsu",
+        "role": "n",
+        "meaning": "reality",
+        "kanji": "present, reality",
+        "note": "",
+        "timestamp": "04-11-2025 15:58"
+    },
+    "急": {
+        "word": "急",
+        "romaji": "kyuu",
+        "role": "adj",
+        "meaning": "sudden, urgent",
+        "kanji": "hurry",
+        "note": "",
+        "timestamp": "04-11-2025 15:59"
+    },
+    "築く": {
+        "word": "築く",
+        "romaji": "kizu.ku",
+        "role": "v",
+        "meaning": "to build, to amass, to pile up",
+        "kanji": "fabricate",
+        "note": "",
+        "timestamp": "04-11-2025 16:00"
+    },
+    "遅い": {
+        "word": "遅い",
+        "romaji": "oso.i",
+        "role": "adj",
+        "meaning": "slow, late",
+        "kanji": "slow",
+        "note": "",
+        "timestamp": "04-11-2025 16:01"
+    },
+    "置く": {
+        "word": "置く",
+        "romaji": "o.ku",
+        "role": "v, auxv",
+        "meaning": "to put / to place, to establish, to leave (alone)",
+        "kanji": "placement",
+        "note": "",
+        "timestamp": "04-11-2025 16:03"
+    },
+    "独り": {
+        "word": "独り",
+        "romaji": "hito.ri",
+        "role": "n",
+        "meaning": "alone, single [unmarried]",
+        "kanji": "single",
+        "note": "",
+        "timestamp": "04-11-2025 16:04"
+    },
+    "許す": {
+        "word": "許す",
+        "romaji": "yuru.su",
+        "role": "v",
+        "meaning": "to forgive, to allow",
+        "kanji": "permit",
+        "note": "",
+        "timestamp": "04-11-2025 16:04"
+    },
+    "従う": {
+        "word": "従う",
+        "romaji": "shitaga.u",
+        "role": "v",
+        "meaning": "to obey, to follow",
+        "kanji": "accompany",
+        "note": "",
+        "timestamp": "04-11-2025 16:06"
+    },
+    "捨てる": {
+        "word": "捨てる",
+        "romaji": "su.teru",
+        "role": "v",
+        "meaning": "to throw away, to abandon",
+        "kanji": "discard",
+        "note": "",
+        "timestamp": "04-11-2025 16:07"
+    },
+    "隣": {
+        "word": "隣",
+        "romaji": "tonari",
+        "role": "n, adj",
+        "meaning": "beside, adjacent, next to",
+        "kanji": "neighboring",
+        "note": "",
+        "timestamp": "04-11-2025 16:12"
+    },
+    "睨む": {
+        "word": "睨む",
+        "romaji": "nira.mu",
+        "role": "v",
+        "meaning": "to glare at [with hostility]",
+        "kanji": "glare / authority",
+        "note": "",
+        "timestamp": "04-11-2025 16:12"
+    },
+    "巻き込む": {
+        "word": "巻き込む",
+        "romaji": "ma.ki-ko.mu",
+        "role": "v, cpv",
+        "meaning": "to involve / to drag into, to roll up / to swallow up",
+        "kanji": "scroll, crowded",
+        "note": "",
+        "timestamp": "04-11-2025 16:15"
+    },
+    "膝枕": {
+        "word": "膝枕",
+        "romaji": "hiza-makura",
+        "role": "n",
+        "meaning": "lap pillow",
+        "kanji": "knee, pillow",
+        "note": "",
+        "timestamp": "04-11-2025 16:15"
+    },
+    "出来る": {
+        "word": "出来る",
+        "romaji": "de-ki.ru",
+        "role": "v",
+        "meaning": "to be able to do, to be made, to be finished",
+        "kanji": "exit, come",
+        "note": "",
+        "timestamp": "04-11-2025 22:54"
+    },
+    "仰向け": {
+        "word": "仰向け",
+        "romaji": "ao-mu.ke",
+        "role": "n",
+        "meaning": "facing upward / face-up",
+        "kanji": "face-up, yonder",
+        "note": "",
+        "timestamp": "04-11-2025 23:34"
+    },
+    "照れ": {
+        "word": "照れ",
+        "romaji": "te.re",
+        "role": "n",
+        "meaning": "shyness, abashment, bashfulness",
+        "kanji": "illuminate",
+        "note": "",
+        "timestamp": "05-11-2025 09:56"
+    },
+    "照れる": {
+        "word": "照れる",
+        "romaji": "te.reru",
+        "role": "v",
+        "meaning": "to be shy, to be bashful, to feel awkward",
+        "kanji": "illuminate",
+        "note": "",
+        "timestamp": "05-11-2025 09:58"
+    },
+    "美人": {
+        "word": "美人",
+        "romaji": "bi-jin",
+        "role": "n",
+        "meaning": "beautiful woman, hotie / babe",
+        "kanji": "beauty, person",
+        "note": "",
+        "timestamp": "07-11-2025 19:23"
+    },
+    "射精": {
+        "word": "射精",
+        "romaji": "sha-sei",
+        "role": "n, v",
+        "meaning": "ejaculation / cum, to ejaculate / to cum",
+        "kanji": "shoot, refined",
+        "note": "",
+        "timestamp": "08-11-2025 13:20"
+    },
+    "未成年": {
+        "word": "未成年",
+        "romaji": "mi-sei-nen",
+        "role": "n",
+        "meaning": "minor (of age), underage",
+        "kanji": "un-, turn into, year",
+        "note": "",
+        "timestamp": "12-11-2025 14:34"
+    },
+    "格好": {
+        "word": "格好",
+        "romaji": "kak-kou, kak-ko",
+        "role": "n, adj",
+        "meaning": "shape / figure / posture, appearance, state, suitable / fit",
+        "kanji": "status, fond",
+        "note": "Alternative form: 恰好 (just as, fond)",
+        "timestamp": "16-11-2025 13:13"
+    },
+    "兄弟": {
+        "word": "兄弟",
+        "romaji": "kyou-dai",
+        "role": "n",
+        "meaning": "siblings / siblings-in-law, brothers / brothers-in-law, sisters / sisters-in-law",
+        "kanji": "elder brother, younger brother",
+        "note": "",
+        "timestamp": "16-11-2025 13:17"
+    },
+    "希望": {
+        "word": "希望",
+        "romaji": "ki-bou",
+        "role": "n, v",
+        "meaning": "hope / wish, to hope / to wish, expectation",
+        "kanji": "hope, ambition",
+        "note": "Alternative form: 冀望 (hope for, ambition) [rarely used]",
+        "timestamp": "16-11-2025 13:55"
+    },
+    "絶望": {
+        "word": "絶望",
+        "romaji": "zetsu-bou",
+        "role": "n, v",
+        "meaning": "despair, hopelessness",
+        "kanji": "discontinue, ambition",
+        "note": "",
+        "timestamp": "16-11-2025 13:57"
+    },
+    "紙一重": {
+        "word": "紙一重",
+        "romaji": "kami-hito-e",
+        "role": "adj, n",
+        "meaning": "paper-thin [difference], razor-thin, very slight",
+        "kanji": "paper, one, heavy",
+        "note": "",
+        "timestamp": "16-11-2025 14:03"
+    },
+    "年齢": {
+        "word": "年齢",
+        "romaji": "nen-rei",
+        "role": "n",
+        "meaning": "age, years",
+        "kanji": "year, age",
+        "note": "Alternative form: 年令 (year, orders)",
+        "timestamp": "16-11-2025 14:06"
+    },
+    "必殺": {
+        "word": "必殺",
+        "romaji": "his-satsu",
+        "role": "n",
+        "meaning": "certain kill, deadly, knockout",
+        "kanji": "invariably, kill",
+        "note": "",
+        "timestamp": "16-11-2025 14:16"
+    },
+    "必殺技": {
+        "word": "必殺技",
+        "romaji": "his-satsu-waza",
+        "role": "n",
+        "meaning": "killer technique, special move / lethal move",
+        "kanji": "invariably, kill, skill",
+        "note": "",
+        "timestamp": "16-11-2025 14:18"
+    },
+    "泊まる": {
+        "word": "泊まる",
+        "romaji": "to.maru",
+        "role": "v",
+        "meaning": "to stay at, to be docked / to be berthed / to be moored",
+        "kanji": "overnight stay",
+        "note": "Alternative form: 泊る",
+        "timestamp": "16-11-2025 14:20"
+    },
+    "意外": {
+        "word": "意外",
+        "romaji": "i-gai",
+        "role": "adj, adv",
+        "meaning": "unexpected, surprising",
+        "kanji": "idea, outside",
+        "note": "Adverb forms: 意外と (spoken), 意外に (written)",
+        "timestamp": "16-11-2025 14:24"
+    },
+    "以外": {
+        "word": "以外",
+        "romaji": "i-gai",
+        "role": "n",
+        "meaning": "excluding / except for / apart from, other than / besides / in addition to, outside [boundary / scope]",
+        "kanji": "by means of, outside",
+        "note": "以外 is used after a noun, essentially acting as a suffix, and is never used as a standalone noun (unless the preceding noun is omitted).",
+        "timestamp": "16-11-2025 15:10"
+    },
+    "童貞": {
+        "word": "童貞",
+        "romaji": "dou-tei",
+        "role": "n,adj",
+        "meaning": "virginity (of a male), virgin (male), nun / sister (Christianity)",
+        "kanji": "juvenile, upright",
+        "note": "",
+        "timestamp": "16-11-2025 15:15"
+    },
+    "処女": {
+        "word": "処女",
+        "romaji": "sho-jo",
+        "role": "n, adj",
+        "meaning": "virginity (of a female), virgin (female), virgin [unspoiled by human activity], debut / maiden",
+        "kanji": "dispose, woman",
+        "note": "",
+        "timestamp": "16-11-2025 15:17"
+    },
+    "現役": {
+        "word": "現役",
+        "romaji": "gen-eki",
+        "role": "n",
+        "meaning": "active duty / active service, student taking university entrance exam while enrolled, student who passed university entrance exam on first try",
+        "kanji": "present, duty",
+        "note": "",
+        "timestamp": "16-11-2025 15:26"
+    },
+    "素人": {
+        "word": "素人",
+        "romaji": "shirou-to, shiro-to, shira-bito",
+        "role": "n",
+        "meaning": "amateur / layman / ordinary person / novice, unlicensed prostitute (archaic)",
+        "kanji": "elementary, person",
+        "note": "",
+        "timestamp": "16-11-2025 15:33"
+    },
+    "決して": {
+        "word": "決して",
+        "romaji": "kes.shite, ke.shite",
+        "role": "adv",
+        "meaning": "(not) ever / (not) by any means / (not) in the least / (not) in any way / (not) at all",
+        "kanji": "decide",
+        "note": "- 決して is an adverb that has a neutral meaning by itself, but can only be used in negative sentences.|- A similar example is the adverb 全然 meaning \"at all\" by itself, but is only used in negative sentences to mean \"not at all\".",
+        "timestamp": "16-11-2025 17:01"
+    },
+    "暴き出す": {
+        "word": "暴き出す",
+        "romaji": "aba.ki-da.su",
+        "role": "v, cpv",
+        "meaning": "to dig up and expose",
+        "kanji": "outburst, exit",
+        "note": "Alternative form: 暴きだす",
+        "timestamp": "16-11-2025 17:10"
+    },
+    "最近": {
+        "word": "最近",
+        "romaji": "sai-kin",
+        "role": "n, adv",
+        "meaning": "lately / recently, these days / nowadays, right now",
+        "kanji": "utmost, near",
+        "note": "",
+        "timestamp": "16-11-2025 23:30"
+    },
+    "帰る": {
+        "word": "帰る",
+        "romaji": "kae.ru",
+        "role": "v",
+        "meaning": "to return, to come (home) / to go back (home), to leave, to get home / to get to home plate [baseball]",
+        "kanji": "homecoming",
+        "note": "Alternative form: 還る (send back)",
+        "timestamp": "17-11-2025 13:43"
+    },
+    "変える": {
+        "word": "変える",
+        "romaji": "ka.eru",
+        "role": "v",
+        "meaning": "to change / to alter / to transform, to convert / to turn / to vary, to reform / to revise / to amend",
+        "kanji": "unusual",
+        "note": "",
+        "timestamp": "17-11-2025 13:49"
+    },
+    "居る": {
+        "word": "居る",
+        "romaji": "i.ru",
+        "role": "v, auxv",
+        "meaning": "to be (animate object), to exist, to stay, to be doing [auxiliary], to have done [auxiliary] / to be done [auxiliary]",
+        "kanji": "reside",
+        "note": "Often spelled in kana only",
+        "timestamp": "18-11-2025 16:25"
+    }
+}
