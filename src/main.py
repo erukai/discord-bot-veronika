@@ -58,15 +58,18 @@ for cmd in [designelements]:
 
 #-----------------------------------------------------------
 
-'''RED = "\033[31m"
+RED = "\033[31m"
 PURPLE = "\033[0;35m"
-RESET = "\033[0m"'''
+GREEN = "\033[32m"
+GREY = "\033[90m"
+BOLD = "\033[1m"
+RESET = "\033[0m"
 
 timenow = datetime.now(timezone(timedelta(hours=8))).replace(microsecond=0, tzinfo=None)
 
 @bot.event
 async def on_ready():        
-    print(f"{bot.user} has logged in! {timenow}")
+    print(f"{PURPLE}{bot.user} {GREEN}has logged in! {BOLD}{GREY}{timenow}{RESET}")
 
     if not change_status.is_running():
         change_status.start(bot)
@@ -77,7 +80,7 @@ async def on_ready():
 
 @bot.event
 async def on_disconnect():
-    print(f'{bot.user} has logged out. {timenow}')
+    print(f'{PURPLE}{bot.user} {RED}has logged out. {BOLD}{GREY}{timenow}{RESET}')
 
 #catch missing roles / permissions errors
 @bot.event
