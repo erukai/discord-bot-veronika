@@ -309,7 +309,7 @@ class Setting(commands.Cog):
                 await ctx.send(f"The current mode is already `{mastermode}`!")
                 return
             else:
-                mastermode = "normal" if mode == "normal" else "master"
+                mastermode = mode
                 await ctx.send(f"Mode has been changed to `{mastermode}`!")
 
         # Add or update the entry

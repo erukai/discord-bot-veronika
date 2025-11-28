@@ -3,7 +3,7 @@ from discord.ext import commands
 from datetime import datetime, timezone
 import random
 
-from .modeset.mode_func import get_text
+from .text_source.text_func import get_text
 
 @commands.command(aliases=["ph"])
 async def placeholder(ctx):

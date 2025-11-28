@@ -108,7 +108,7 @@ async def delnote(ctx, index:int=None):
             description="`=delnote [index]`",
             color=discord.Color(0x4c3228))      
         embed.add_field(name="Alias", value="`=dn`")
-        embed.set_footer(text="'index' is the position of the note (note 1, note 2, etc.)")
+        embed.set_footer(text="'index' is the position of the note (1, 2, 3, etc.)")
         await ctx.send(embed=embed)
         return
     
@@ -161,7 +161,7 @@ async def editnote(ctx, index:int=None, *, text:str=None):
             description="`=editnote [index] [text]`",
             color=discord.Color(0x4c3228))      
         embed.add_field(name="Alias", value="`=en`")
-        embed.set_footer(text="'index' is the position of the note (note 1, note 2, etc.)")
+        embed.set_footer(text="'index' is the position of the note (1, 2, 3, etc.)")
         await ctx.send(embed=embed)
         return
 
@@ -293,3 +293,58 @@ async def weather(ctx, measure:str=None, *, city:str=None):
     embed.set_thumbnail(url=f"https:{condition_url}")
     embed.set_footer(text=f"Local time: {localtime}")
     await ctx.send(embed=embed)
+
+
+@commands.command(aliases=["lang"])
+async def language(ctx, code:str=None):
+    if code is None:
+        embed = discord.Embed(
+            title="Syntax:",
+            description="`=language [code]`",
+            color=discord.Color(0x4c3228))      
+        embed.add_field(name="Available Languages", value="- English: `en`\n- Malay (Classical): `my`\n- T'kilab: `tk`", inline=False)
+        embed.add_field(name="Alias", value="`=lang`")
+        await ctx.send(embed=embed)
+        return
+
+    #get language file
+    lang_path = os.path.join("src", "language", "lang.json")
+    with open(lang_path, "r") as f:
+        langcheck = json.load(f)
+
+    user_id = (str(ctx.author.id))
+
+    #get user's current language
+    try:
+        userlang = langcheck[user_id]
+    except KeyError: #user key not exist
+        userlang = langcheck[user_id] = "en" #en is default
+        with open(lang_path, "w", encoding="utf-8") as f:
+            json.dump(langcheck, f, indent=4, ensure_ascii=False) #update key immediately
+
+    if code not in ['en', 'my', 'tk']:
+        embed = discord.Embed(
+            title="Syntax:",
+            description="`=language [code]`",
+            color=discord.Color(0x4c3228))      
+        embed.add_field(name="Available Languages", value="- English: `en`\n- Malay: `my`\n- T'kilab: `tk`", inline=False)
+        embed.add_field(name="Alias", value="`=lang`")
+
+        await ctx.send("Language code is not in my database!")
+        await ctx.send(embed=embed)
+        return
+
+    else:
+        if userlang == code:
+            await ctx.send(f"Current language is already `English`!")
+            return
+        else:
+            new_userlang = code
+            await ctx.send(f"Language has been changed to `English`!")
+    
+    # Add or update the entry
+    langcheck[user_id] = new_userlang
+
+    # Write updated data back to file
+    with open(lang_path, "w", encoding="utf-8") as f:
+        json.dump(langcheck, f, indent=4, ensure_ascii=False)

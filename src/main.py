@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()  # loads .env file into environment
 TOKEN = os.getenv("TOKEN")
 
-from .modeset.mode_func import get_text
+from .text_source.text_func import get_text
 
 #-----------------------------------------------------------
 
@@ -38,8 +38,8 @@ from .misc import placeholder, hello, parrot, mic, coin, dice, randnum
 for cmd in [placeholder, hello, parrot, mic, coin, dice, randnum]:
     bot.add_command(cmd)
 
-from .utility.utility import note, mynote, editnote, delnote, weather
-for cmd in [note, mynote, editnote, delnote, weather]:
+from .utility.utility import note, mynote, editnote, delnote, weather, language
+for cmd in [note, mynote, editnote, delnote, weather, language]:
     bot.add_command(cmd)
 
 from .sirius import orcus, orcustime, orcuscalc
@@ -83,6 +83,12 @@ async def on_ready():
 @bot.event
 async def on_disconnect():
     print(f'{PURPLE}{bot.user} {RED}has logged out. {BOLD}{GREY}{timenow}{RESET}')
+
+@bot.event
+async def on_resumed():
+    print(f"{PURPLE}{bot.user} {GREEN}has resumed! {BOLD}{GREY}{timenow}{RESET}")
+
+#-----------------------------------------------------------
 
 #catch missing roles / permissions errors
 @bot.event

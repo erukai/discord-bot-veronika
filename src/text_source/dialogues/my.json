@@ -2,11 +2,11 @@
     "master" : {
 
         "MAIN" : {
-            "command_error": "Master, the command does not exist! Use `=help` if you forgot my commands :>"
+            "command_error": "Tuanku, arahan ini tidak wujud! Gunakan `=help` jika Tuanku lupa arahan-arahan hamba :>"
         },
 
         "HELP" : {
-            "help_text" : "What can I help you with, Master? ♡"
+            "help_text" : "Apa yang boleh saya bantu, Tuanku? ♡"
         },
 
         "INFO" : {
@@ -22,7 +22,7 @@
         },
 
         "MISC" : {
-            "hello": "Hello, Master!"
+            "hello": "Apa khabar, Tuanku!"
         }
 
     },
@@ -30,7 +30,7 @@
     "normal" : {
 
         "MAIN" : {
-            "command_error": "The command does not exist! Use `=help` to view my commands."
+            "command_error": "The command does not exist! Use `=help` if you forgot my commands."
         },
 
         "HELP" : {
@@ -38,7 +38,7 @@
         },
 
         "INFO" : {
-
+            
         },
 
         "JAPANESE" : {
@@ -54,5 +54,4 @@
         }
 
     }
-    
 }

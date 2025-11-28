@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord.ui import View, Select
 
-from .modeset.mode_func import get_text
+from .text_source.text_func import get_text
 
 #---------------------------------------------------------
 
@@ -11,7 +11,7 @@ categories = {
     ":heart: Moderation": "`silence` • `unsilence` • `smite` • `banish` • `banishid` • `unbanish` • `burn` • `EXPLOOOSION`",
     ":white_heart: Minigames": "`roulette` 🔄 • `rpg` ❌",
     ":black_heart: Miscellaneous": "`placeholder` • `hello` • `parrot` • `mic` • `coin` • `dice` • `randnum`",
-    ":brown_heart: Utilities": "`note` • `mynote` • `editnote` • `delnote` • `weather`",
+    ":brown_heart: Utilities": "`note` • `mynote` • `editnote` • `delnote` • `weather` • `language`",
     ":orange_heart: Game Profile": "`stats` • `register`",
     ":pink_heart: Sirius Program": "`orcus` • `orcustime` • `orcuscalc` • `earthcalc` ❌",
     ":purple_heart: Japanese": "`entry` • `update` • `list` ❌ • `dictionary` • `vocabquiz` • `wordquiz` ❌ • `kanjiquiz` ❌",
@@ -25,7 +25,7 @@ aliases = {
     ":heart: Moderation": "`mute` • `unmute` • `kick` • `ban` • `banid` • `unban` • `purge` • `nuke` / `ex`",
     ":white_heart: Minigames": "`gun` 🔄 • `game` ❌",
     ":black_heart: Miscellaneous": "`ph` • _`hello`_ • _`parrot`_ • _`mic`_ • _`coin`_ • _`dice`_ • `rand`",
-    ":brown_heart: Utilities": "`n` • `mn` • `en` • `dn` • `wt`",
+    ":brown_heart: Utilities": "`n` • `mn` • `en` • `dn` • `wt` • `lang`",
     ":orange_heart: Game Profile": "_`stats`_ • `reg`",
     ":pink_heart: Sirius Program": "`or` • `ot` • `oc` • `ec` ❌",
     ":purple_heart: Japanese": "`kotoba` / `koto` • `up` • _`list`_ ❌ • `dict` • `vocab` / `vq` • `word` / `wq` ❌ • `kanji` / `kq` ❌",
@@ -88,6 +88,7 @@ utilities.add_field(name="`mynote` _(alias: `mn`)_", value="View your notes.\n`<
 utilities.add_field(name="`editnote` _(alias: `en`)_", value="Edit a note by index.\n`< =editnote [index] [text] >`", inline=False)
 utilities.add_field(name="`delnote` _(alias: `dn`)_", value="Delete a note by index.\n`< =delnote [index] >`", inline=False)
 utilities.add_field(name="`weather` _(alias: `wt`)_", value="Get the current weather of a city.\n`< =weather [measurement] [city] >`", inline=False)
+utilities.add_field(name="`language` _(alias: `lang`)_", value="Change the bot's language (user-specific).\n`< =language [code] >`", inline=False)
 
 #---------------------------------------------
 
