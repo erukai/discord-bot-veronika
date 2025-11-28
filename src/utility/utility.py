@@ -32,7 +32,9 @@ def format(notes_list):
     for index in range(notes_num):
         formatted_text.append(f"- {notes_list[index]} **[{index+1}]**")
 
-    return formatted_text
+    all_notes  = "\n".join(formatted_text)
+
+    return all_notes
 
 #==============================================================
 
@@ -75,8 +77,7 @@ async def note(ctx, *, text:str=None):
     notes = note_db.get(user_id)
 
     #revise the index of all notes
-    text_list = format(notes)
-    all_notes  = "\n".join(text_list)
+    all_notes = format(notes)
     
     embed = note_embed(ctx, all_notes)
     await ctx.send(embed=embed)
@@ -93,8 +94,7 @@ async def mynote(ctx):
         return
 
     #revise the index of all notes
-    text_list = format(notes)
-    all_notes  = "\n".join(text_list)
+    all_notes = format(notes)
     
     embed = note_embed(ctx, all_notes)
     await ctx.send(embed=embed)
@@ -105,7 +105,7 @@ async def delnote(ctx, index:int=None):
     if index is None:
         embed = discord.Embed(
             title="Syntax:",
-            description="`=delnote [index: int]`",
+            description="`=delnote [index]`",
             color=discord.Color(0x4c3228))      
         embed.add_field(name="Alias", value="`=dn`")
         embed.set_footer(text="'index' is the position of the note (note 1, note 2, etc.)")
@@ -115,9 +115,9 @@ async def delnote(ctx, index:int=None):
     db = load_db()
     user_id = str(ctx.author.id)
 
-    notes = db.get(user_id) #will return a list. if list not found, will return None. if list empty, will return a falsy list.
+    notes = db.get(user_id) #will return a list. if id not found, will return None. if list empty, will return a falsy list.
     
-    #if list is falsy, i.e. empty
+    #if list is falsy, i.e. empty or id is None
     if not notes:
         await ctx.send("You do not have any notes!")
         return
@@ -138,8 +138,7 @@ async def delnote(ctx, index:int=None):
 
             #revise the index of all notes
             new_notes = db.get(user_id)
-            text_list = format(new_notes)
-            all_notes  = "\n".join(text_list)
+            all_notes = format(new_notes)
             
             embed = note_embed(ctx, all_notes)
             await ctx.send(embed=embed)
@@ -155,38 +154,51 @@ async def delnote(ctx, index:int=None):
     
 
 @commands.command(aliases=["en"])
-async def editnote(ctx, index:int, *, text:str=None):
-    if text is None:
+async def editnote(ctx, index:int=None, *, text:str=None):
+    if (index is None) or (text is None):
         embed = discord.Embed(
             title="Syntax:",
-            description="`=note [text]`",
+            description="`=editnote [index] [text]`",
             color=discord.Color(0x4c3228))      
-        embed.add_field(name="Alias", value="`=n`")
-        embed.set_footer(text="Use =mynote to view your notes.")
+        embed.add_field(name="Alias", value="`=en`")
+        embed.set_footer(text="'index' is the position of the note (note 1, note 2, etc.)")
         await ctx.send(embed=embed)
         return
 
+    db = load_db()
     user_id = str(ctx.author.id)
-    note_db = load_db()
 
-    #Update the entry. If key not exist, add to the dict and then update.
-    note_db.setdefault(user_id, []).append(text)
-
-    # Write updated data to db
-    write_db(note_db)
-
-    await ctx.send("A note has been recorded!")
-
-    #--------------------------------
-
-    notes = note_db.get(user_id)
-
-    #revise the index of all notes
-    text_list = format(notes)
-    all_notes  = "\n".join(text_list)
+    notes = db.get(user_id)
     
-    embed = note_embed(ctx, all_notes)
-    await ctx.send(embed=embed)
+    #if list is falsy, i.e. empty
+    if not notes:
+        await ctx.send("You do not have any notes!")
+        return
+
+    if index > 0:
+        index -= 1
+    else:
+        await ctx.send("Index must be at least 1")
+        return
+
+    try:
+        notes[index] = text
+        
+        await ctx.send("A note has been edited!")
+
+        db[user_id] = notes
+        write_db(db)
+
+        #revise the index of all notes
+        new_notes = db.get(user_id)
+        all_notes = format(new_notes)
+        
+        embed = note_embed(ctx, all_notes)
+        await ctx.send(embed=embed)
+
+    except IndexError:
+        await ctx.send("Index provided is more than the number of notes!")
+        return
 
 
 @commands.command(aliases=["wt"])

@@ -1,6 +1,10 @@
 {
     "master" : {
 
+        "MAIN" : {
+            "command_error": "Master, the command does not exist! Use `=help` if you forgot my commands :>"
+        },
+
         "HELP" : {
             "help_text" : "What can I help you with, Master? ♡"
         },
@@ -24,6 +28,10 @@
     },
 
     "normal" : {
+
+        "MAIN" : {
+            "command_error": "The command does not exist! Use `=help` to view my commands."
+        },
 
         "HELP" : {
             "help_text" : "What can I help you with?"

@@ -11,7 +11,7 @@ categories = {
     ":heart: Moderation": "`silence` • `unsilence` • `smite` • `banish` • `banishid` • `unbanish` • `burn` • `EXPLOOOSION`",
     ":white_heart: Minigames": "`roulette` 🔄 • `rpg` ❌",
     ":black_heart: Miscellaneous": "`placeholder` • `hello` • `parrot` • `mic` • `coin` • `dice` • `randnum`",
-    ":brown_heart: Utilities": "`note` • `mynote` • `delnote` • `weather`",
+    ":brown_heart: Utilities": "`note` • `mynote` • `editnote` • `delnote` • `weather`",
     ":orange_heart: Game Profile": "`stats` • `register`",
     ":pink_heart: Sirius Program": "`orcus` • `orcustime` • `orcuscalc` • `earthcalc` ❌",
     ":purple_heart: Japanese": "`entry` • `update` • `list` ❌ • `dictionary` • `vocabquiz` • `wordquiz` ❌ • `kanjiquiz` ❌",
@@ -25,7 +25,7 @@ aliases = {
     ":heart: Moderation": "`mute` • `unmute` • `kick` • `ban` • `banid` • `unban` • `purge` • `nuke` / `ex`",
     ":white_heart: Minigames": "`gun` 🔄 • `game` ❌",
     ":black_heart: Miscellaneous": "`ph` • _`hello`_ • _`parrot`_ • _`mic`_ • _`coin`_ • _`dice`_ • `rand`",
-    ":brown_heart: Utilities": "`n` • `mn` • `dn` • `wt`",
+    ":brown_heart: Utilities": "`n` • `mn` • `en` • `dn` • `wt`",
     ":orange_heart: Game Profile": "_`stats`_ • `reg`",
     ":pink_heart: Sirius Program": "`or` • `ot` • `oc` • `ec` ❌",
     ":purple_heart: Japanese": "`kotoba` / `koto` • `up` • _`list`_ ❌ • `dict` • `vocab` / `vq` • `word` / `wq` ❌ • `kanji` / `kq` ❌",
@@ -85,7 +85,8 @@ utilities = discord.Embed(title=":brown_heart: Utilities", description="Useful g
 
 utilities.add_field(name="`note` _(alias: `n`)_", value="Add a note to your profile.\n`< =note [text] >`", inline=False)
 utilities.add_field(name="`mynote` _(alias: `mn`)_", value="View your notes.\n`< =mynote >`", inline=False)
-utilities.add_field(name="`delnote` _(alias: `dn`)_", value="Delete a note.\n`< =delnote [index] >`", inline=False)
+utilities.add_field(name="`editnote` _(alias: `en`)_", value="Edit a note by index.\n`< =editnote [index] [text] >`", inline=False)
+utilities.add_field(name="`delnote` _(alias: `dn`)_", value="Delete a note by index.\n`< =delnote [index] >`", inline=False)
 utilities.add_field(name="`weather` _(alias: `wt`)_", value="Get the current weather of a city.\n`< =weather [measurement] [city] >`", inline=False)
 
 #---------------------------------------------
@@ -237,8 +238,7 @@ class Help(commands.Cog):
 
     @commands.command()
     async def help(self, ctx):
-        text_db = get_text(ctx)
-        help_text = text_db["HELP"]["help_text"]
+        help_text = get_text(ctx)["HELP"]["help_text"]
 
         embed = help1
 
@@ -247,8 +247,7 @@ class Help(commands.Cog):
 
     @commands.command()
     async def alhelp(self, ctx):
-        text_db = get_text(ctx)
-        help_text = text_db["HELP"]["help_text"]
+        help_text = get_text(ctx)["HELP"]["help_text"]
 
         embed = help2
 

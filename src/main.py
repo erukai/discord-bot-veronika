@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()  # loads .env file into environment
 TOKEN = os.getenv("TOKEN")
 
+from .modeset.mode_func import get_text
+
 #-----------------------------------------------------------
 
 BOT_CHANNEL_ID = 1360930885783912468
@@ -36,8 +38,8 @@ from .misc import placeholder, hello, parrot, mic, coin, dice, randnum
 for cmd in [placeholder, hello, parrot, mic, coin, dice, randnum]:
     bot.add_command(cmd)
 
-from .utility.utility import note, mynote, delnote, weather
-for cmd in [note, mynote, delnote, weather]:
+from .utility.utility import note, mynote, editnote, delnote, weather
+for cmd in [note, mynote, editnote, delnote, weather]:
     bot.add_command(cmd)
 
 from .sirius import orcus, orcustime, orcuscalc
@@ -89,6 +91,11 @@ async def on_command_error(ctx, error):
         await ctx.send("You are not my Master. You cannot use this command.")
     elif isinstance(error, commands.MissingPermissions):
         await ctx.send("I'm sorry, but you lack moderation permissions.")
+    elif isinstance(error, commands.CommandNotFound):
+        command_error = get_text(ctx)["MAIN"]["command_error"]
+        await ctx.send(command_error)
+    else:
+        raise error
 
 if __name__ == "__main__":
     bot.run(TOKEN)
