@@ -5,16 +5,14 @@ folder = "modeset"
 
 #get dialogue file
 textpath = os.path.join("src", folder, "mode_dialogue.json")
-os.makedirs(folder, exist_ok=True)
 
 with open(textpath, "r") as f:
     textfile = json.load(f)
 
 #get master's mode file
 modepath = os.path.join("src", folder, "master_mode.json")
-os.makedirs(folder, exist_ok=True)
 
-def current_mode():    
+def current_mode():
     with open(modepath, "r") as f:
         modecheck = json.load(f)
     

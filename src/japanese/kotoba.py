@@ -14,7 +14,6 @@ import re
 folder = "japanese"
 filename = "worddata.json"
 path = os.path.join("src", folder, filename)
-os.makedirs(folder, exist_ok=True)
 
 # Load database
 def load_db():

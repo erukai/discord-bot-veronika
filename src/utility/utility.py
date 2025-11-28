@@ -13,7 +13,6 @@ WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 folder = "utility"
 filename = "note_db.json"
 path = os.path.join("src", folder, filename)
-os.makedirs(folder, exist_ok=True)
 
 # Load database
 def load_db():
