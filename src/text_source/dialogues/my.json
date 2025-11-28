@@ -30,11 +30,11 @@
     "normal" : {
 
         "MAIN" : {
-            "command_error": "The command does not exist! Use `=help` if you forgot my commands."
+            "command_error": "Arahan ini tidak wujud! Gunakan `=help` jika kamu lupa arahan-arahan saya."
         },
 
         "HELP" : {
-            "help_text" : "What can I help you with?"
+            "help_text" : "Apa yang boleh saya bantu?"
         },
 
         "INFO" : {
@@ -50,7 +50,7 @@
         },
 
         "MISC" : {
-            "hello": "Hello!"
+            "hello": "Apa khabar!"
         }
 
     }

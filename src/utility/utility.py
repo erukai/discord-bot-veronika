@@ -9,6 +9,8 @@ from dotenv import load_dotenv
 load_dotenv()  # loads .env file into environment
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 
+from ..text_source.text_func import get_lang
+
 #database path
 folder = "utility"
 filename = "note_db.json"
@@ -26,11 +28,16 @@ def write_db(new_data):
 
 # Format note (CLIENT SIDE ONLY)
 def format(notes_list):
-    notes_num = len(notes_list)
 
     formatted_text = []
-    for index in range(notes_num):
-        formatted_text.append(f"- {notes_list[index]} **[{index+1}]**")
+    for index, item in enumerate(notes_list):
+    
+        child_notes = item.split("\n", 1) #"test\n  - test 1\n  - test 2" --> ["test", "  - test 1\n  - test 2"]
+        child_notes[0] = f"{child_notes[0]} **[{index+1}]**\n" #"test" --> "test **[1]**\n"
+
+        item = "".join(child_notes) #["test **[1]**\n", "  - test 1\n  - test 2"] --> "test **[1]**\n", "  - test 1\n  - test 2"
+
+        formatted_text.append(f"- {item}") #"test **[1]**\n", "  - test 1\n  - test 2" --> "- test **[1]**\n", "  - test 1\n  - test 2"
 
     all_notes  = "\n".join(formatted_text)
 
@@ -308,19 +315,14 @@ async def language(ctx, code:str=None):
         return
 
     #get language file
-    lang_path = os.path.join("src", "language", "lang.json")
+    lang_path = os.path.join("src", "text_source", "dialogues", "lang.json")
     with open(lang_path, "r") as f:
         langcheck = json.load(f)
 
     user_id = (str(ctx.author.id))
 
     #get user's current language
-    try:
-        userlang = langcheck[user_id]
-    except KeyError: #user key not exist
-        userlang = langcheck[user_id] = "en" #en is default
-        with open(lang_path, "w", encoding="utf-8") as f:
-            json.dump(langcheck, f, indent=4, ensure_ascii=False) #update key immediately
+    userlang = get_lang(ctx)
 
     if code not in ['en', 'my', 'tk']:
         embed = discord.Embed(

@@ -22,7 +22,9 @@
         },
 
         "MISC" : {
-            "hello": "Hello, Master!"
+            "placeholder": ["Title", "This is is the description.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"],
+            "hello": "Hello, Master!",
+            "coin": ["heads", "tails", "Coin flipped! Master, you got {side}!"]
         }
 
     },
@@ -50,7 +52,37 @@
         },
 
         "MISC" : {
-            "hello": "Hello!"
+            "placeholder": ["Title", "This is is the description.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"],
+            "hello": "Hello, {name}!",
+            "coin": ["heads", "tails", "Coin flipped! You got {side}!"]
+        }
+
+    },
+
+    "neutral" : {
+
+        "MAIN" : {
+            
+        },
+
+        "HELP" : {
+
+        },
+
+        "INFO" : {
+            
+        },
+
+        "JAPANESE" : {
+            
+        },
+
+        "MASTERONLY" : {
+
+        },
+
+        "MISC" : {
+            "placeholder": ["Title", "This is is the description.", "This is the footer.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"]
         }
 
     }

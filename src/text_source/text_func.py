@@ -33,7 +33,8 @@ def get_lang(ctx):
         userlang = langfile[user_id]
     except KeyError: #user key not exist
         userlang = langfile[user_id] = "en" #en is default
-        with open(langpath, "w", encoding="utf-8") as f:
+
+        with open(langpath, "w", encoding="utf-8") as f: #update key before returning value
             json.dump(langfile, f, indent=4, ensure_ascii=False)
 
     return userlang
@@ -41,7 +42,11 @@ def get_lang(ctx):
 
 masterrole = "Veronika's Master"
 
-def get_mode(ctx):
+def get_mode(ctx, neutral:bool=False):
+
+    if neutral:
+        mode = "neutral"
+        return mode
 
     #if author is a master
     if any(role.name == masterrole for role in ctx.author.roles):
@@ -66,5 +71,17 @@ def get_text(ctx):
 
     textdict = text_dict(userlang) #get lang file first
     text_mode = textdict.get(usermode) #then get dictionary {"HELP":{...},"INFO":{...},"JAPANESE":{...}, etc.}, either master or normal.
+
+    return text_mode
+
+
+#call in commands with neutral texts
+def get_text_neu(ctx):
+
+    userlang = get_lang(ctx)
+    mode_neutral = get_mode(ctx, True)
+
+    textdict = text_dict(userlang) #get lang file first
+    text_mode = textdict.get(mode_neutral) #then get dictionary {"HELP":{...},"INFO":{...},"JAPANESE":{...}, etc.}, either master or normal.
 
     return text_mode

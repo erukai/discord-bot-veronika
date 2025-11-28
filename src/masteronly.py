@@ -278,7 +278,7 @@ class Setting(commands.Cog):
     @commands.command(aliases=["md"])
     async def mode(self, ctx, *, mode:str=None):
         #get master's mode file
-        modepath = os.path.join("src", "modeset", "master_mode.json")
+        modepath = os.path.join("src", "text_source", "user_setting", "mode_set.json")
 
         with open(modepath, "r") as f:
             modecheck = json.load(f)
@@ -324,7 +324,7 @@ class Setting(commands.Cog):
     @commands.command(aliases=["mc"])
     async def modecheck(self, ctx):
         #get master's mode file
-        modepath = os.path.join("src", "modeset", "master_mode.json")
+        modepath = os.path.join("src", "text_source", "user_setting", "mode_set.json")
 
         with open(modepath, "r") as f:
             modecheck = json.load(f)
