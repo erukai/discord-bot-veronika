@@ -28,18 +28,26 @@ def write_db(new_data):
 
 # Format note (CLIENT SIDE ONLY)
 def format(notes_list):
+    #notes_num = len(notes_list)
 
     formatted_text = []
     for index, item in enumerate(notes_list):
     
         child_notes = item.split("\n", 1) #"test\n  - test 1\n  - test 2" --> ["test", "  - test 1\n  - test 2"]
-        child_notes[0] = f"{child_notes[0]} **[{index+1}]**\n" #"test" --> "test **[1]**\n"
+        for i, item in enumerate(child_notes):
 
-        item = "".join(child_notes) #["test **[1]**\n", "  - test 1\n  - test 2"] --> "test **[1]**\n", "  - test 1\n  - test 2"
+            if i == 0:
+                child_notes[i] = f"{item} **[{index+1}]**\n" #"test" --> "test **[1]**\n"
 
-        formatted_text.append(f"- {item}") #"test **[1]**\n", "  - test 1\n  - test 2" --> "- test **[1]**\n", "  - test 1\n  - test 2"
+            elif i == len(child_notes) - 1:
+                child_notes[i] = f"{item}\n"
 
-    all_notes  = "\n".join(formatted_text)
+            else:
+                continue
+
+        formatted_text.append(f"- {"".join(child_notes)}") #["test **[1]**\n", "  - test 1\n  - test 2"] --> "test **[1]**\n", "  - test 1\n  - test 2"
+
+    all_notes  = "".join(formatted_text)
 
     return all_notes
 
