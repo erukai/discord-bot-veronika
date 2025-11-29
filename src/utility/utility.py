@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()  # loads .env file into environment
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 
-from ..text_source.text_func import get_lang
+from ..text_source.text_func import get_text, get_lang
 
 #database path
 folder = "utility"
@@ -28,8 +28,7 @@ def write_db(new_data):
 
 # Format note (CLIENT SIDE ONLY)
 def format(notes_list):
-    #notes_num = len(notes_list)
-
+    
     formatted_text = []
     for index, item in enumerate(notes_list):
     
@@ -45,7 +44,7 @@ def format(notes_list):
             else:
                 continue
 
-        formatted_text.append(f"- {"".join(child_notes)}") #["test **[1]**\n", "  - test 1\n  - test 2"] --> "test **[1]**\n", "  - test 1\n  - test 2"
+        formatted_text.append(f"- {"".join(child_notes)}") #["test **[1]**\n", "  - test 1\n  - test 2"] --> "- test **[1]**\n", "  - test 1\n  - test 2"
 
     all_notes  = "".join(formatted_text)
 
@@ -54,11 +53,14 @@ def format(notes_list):
 #==============================================================
 
 def note_embed(ctx, all_notes):
+    text = get_text(ctx)["UTILITY"]["note_embed"]
+    name = ctx.author.name
+
     embed = discord.Embed(
-        title="Notes",
+        title=text[0],
         description=all_notes,
         color=discord.Color(0x4c3228))
-    embed.set_author(name=f"{ctx.author.name}'s Notes")
+    embed.set_author(name=text[1].format(author=name))
     embed.set_thumbnail(url=ctx.author.avatar)
 
     return embed
@@ -66,13 +68,15 @@ def note_embed(ctx, all_notes):
 
 @commands.command(aliases=["n"])
 async def note(ctx, *, text:str=None):
+    text = get_text(ctx)["UTILITY"]["note"]
+
     if text is None:
         embed = discord.Embed(
-            title="Syntax:",
-            description="`=note [text]`",
+            title=text[0],
+            description=text[1],
             color=discord.Color(0x4c3228))      
-        embed.add_field(name="Alias", value="`=n`")
-        embed.set_footer(text="Use =mynote to view your notes.")
+        embed.add_field(name=text[2], value="`=n`")
+        embed.set_footer(text=text[3])
         await ctx.send(embed=embed)
         return
 
@@ -85,7 +89,7 @@ async def note(ctx, *, text:str=None):
     # Write updated data to db
     write_db(note_db)
 
-    await ctx.send("A note has been recorded!")
+    await ctx.send(text[4])
 
     #--------------------------------
 
@@ -100,12 +104,14 @@ async def note(ctx, *, text:str=None):
 
 @commands.command(aliases=["mn"])
 async def mynote(ctx):
+    text = get_text(ctx)["UTILITY"]["mynote"]
+
     db = load_db()
     notes = db.get(str(ctx.author.id))
     
     #if list is falsy, i.e. empty
     if not notes:
-        await ctx.send("You do not have any notes!")
+        await ctx.send(text[0])
         return
 
     #revise the index of all notes
@@ -117,13 +123,15 @@ async def mynote(ctx):
 
 @commands.command(aliases=["dn"])
 async def delnote(ctx, index:int=None):
+    text = get_text(ctx)["UTILITY"]["delnote"]
+
     if index is None:
         embed = discord.Embed(
-            title="Syntax:",
-            description="`=delnote [index]`",
+            title=text[0],
+            description=text[1],
             color=discord.Color(0x4c3228))      
-        embed.add_field(name="Alias", value="`=dn`")
-        embed.set_footer(text="'index' is the position of the note (1, 2, 3, etc.)")
+        embed.add_field(name=text[2], value="`=dn`")
+        embed.set_footer(text=text[3])
         await ctx.send(embed=embed)
         return
     
@@ -134,19 +142,19 @@ async def delnote(ctx, index:int=None):
     
     #if list is falsy, i.e. empty or id is None
     if not notes:
-        await ctx.send("You do not have any notes!")
+        await ctx.send(text[4])
         return
 
     if index > 0:
         index -= 1
     else:
-        await ctx.send("Index must be at least 1")
+        await ctx.send(text[5])
         return
 
     try:
         del notes[index]
         if notes:
-            await ctx.send("A note has been removed!")
+            await ctx.send(text[6])
 
             db[user_id] = notes
             write_db(db)
@@ -161,22 +169,24 @@ async def delnote(ctx, index:int=None):
         else:
             db[user_id] = notes
             write_db(db)
-            await ctx.send("All notes have been removed!")
+            await ctx.send(text[7])
 
     except IndexError:
-        await ctx.send("Index provided is more than the number of notes!")
+        await ctx.send(text[8])
         return
     
 
 @commands.command(aliases=["en"])
 async def editnote(ctx, index:int=None, *, text:str=None):
+    text = get_text(ctx)["UTILITY"]["editnote"]
+
     if (index is None) or (text is None):
         embed = discord.Embed(
-            title="Syntax:",
-            description="`=editnote [index] [text]`",
+            title=text[0],
+            description=text[1],
             color=discord.Color(0x4c3228))      
-        embed.add_field(name="Alias", value="`=en`")
-        embed.set_footer(text="'index' is the position of the note (1, 2, 3, etc.)")
+        embed.add_field(name=text[2], value="`=en`")
+        embed.set_footer(text=text[3])
         await ctx.send(embed=embed)
         return
 
@@ -187,19 +197,19 @@ async def editnote(ctx, index:int=None, *, text:str=None):
     
     #if list is falsy, i.e. empty
     if not notes:
-        await ctx.send("You do not have any notes!")
+        await ctx.send(text[4])
         return
 
     if index > 0:
         index -= 1
     else:
-        await ctx.send("Index must be at least 1")
+        await ctx.send(text[5])
         return
 
     try:
         notes[index] = text
         
-        await ctx.send("A note has been edited!")
+        await ctx.send(text[6])
 
         db[user_id] = notes
         write_db(db)
@@ -212,31 +222,32 @@ async def editnote(ctx, index:int=None, *, text:str=None):
         await ctx.send(embed=embed)
 
     except IndexError:
-        await ctx.send("Index provided is more than the number of notes!")
+        await ctx.send(text[7])
         return
 
 
 @commands.command(aliases=["wt"])
 async def weather(ctx, measure:str=None, *, city:str=None):
+    text = get_text(ctx)["UTILITY"]["weather"]
 
     embed = discord.Embed(
-            title="Syntax:",
-            description="`=weather [measurement] [city]`",
+            title=text[0],
+            description=text[1],
             color=discord.Color(0x4c3228))
-    embed.add_field(name="`[measurement]` Arguments", value="`metric` / `m`, `imperial` / `i`", inline=False)
-    embed.add_field(name="Alias", value="`=wt`", inline=False)
+    embed.add_field(name=text[2], value=text[3], inline=False)
+    embed.add_field(name=text[4], value="`=wt`", inline=False)
 
     if measure is None:
         await ctx.send(embed=embed)
         return
 
     elif measure.lower() not in ["metric", "m", "imperial", "i"]:
-        await ctx.send("`[measurement]` argument is not valid!`]")
+        await ctx.send(text[5])
         await ctx.send(embed=embed)
         return
 
     elif city is None:
-        await ctx.send("`[city]` argument is required!")
+        await ctx.send(text[6])
         await ctx.send(embed=embed)
         return
 
@@ -282,14 +293,14 @@ async def weather(ctx, measure:str=None, *, city:str=None):
                     uv = datanow['uv']
                 
                 else:
-                    await ctx.send(f"Sorry! Couldn't fetch weather data... `Error Code: {resp.status}`")
+                    await ctx.send(text[7])
 
         except:
-            await ctx.send("An error has occured! Make sure the city name is correct!")
+            await ctx.send(text[8])
             return
         
     embed = discord.Embed(
-        title="Current Weather",
+        title=text[9],
         description=condition,
         color=discord.Color(0x4c3228))
     
@@ -312,6 +323,8 @@ async def weather(ctx, measure:str=None, *, city:str=None):
 
 @commands.command(aliases=["lang"])
 async def language(ctx, code:str=None):
+    text = get_text(ctx)["UTILITY"]["note"]
+    
     if code is None:
         embed = discord.Embed(
             title="Syntax:",

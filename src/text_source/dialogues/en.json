@@ -13,18 +13,18 @@
             
         },
 
+        "MISC" : {
+            "placeholder": ["Title", "This is is the description.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"],
+            "hello": "Hello, Master!",
+            "coin": ["heads", "tails", "Coin flipped! Master, you got {side}!"]
+        },
+
         "JAPANESE" : {
             
         },
 
         "MASTERONLY" : {
 
-        },
-
-        "MISC" : {
-            "placeholder": ["Title", "This is is the description.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"],
-            "hello": "Hello, Master!",
-            "coin": ["heads", "tails", "Coin flipped! Master, you got {side}!"]
         }
 
     },
@@ -43,18 +43,18 @@
             
         },
 
+        "MISC" : {
+            "placeholder": ["Title", "This is is the description.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"],
+            "hello": "Hello, {name}!",
+            "coin": ["heads", "tails", "Coin flipped! You got {side}!"]
+        },
+
         "JAPANESE" : {
             
         },
 
         "MASTERONLY" : {
 
-        },
-
-        "MISC" : {
-            "placeholder": ["Title", "This is is the description.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"],
-            "hello": "Hello, {name}!",
-            "coin": ["heads", "tails", "Coin flipped! You got {side}!"]
         }
 
     },
@@ -73,16 +73,32 @@
             
         },
 
+        "UTILITY" : {
+            "note_embed": ["Notes", "{author}'s Notes"],
+            "note": ["Syntax", "`=note [text]`", "Alias", "Use =mynote to view your notes.", "A note has been recorded!"],
+            "mynote": ["You do not have any notes!"],
+            "delnote": ["Syntax", "`=delnote [index]`", "Alias", "'index' is the position of the note (e.g. 1, 2, 3, etc.)", 
+                "You do not have any notes!", "Index must be at least 1", "A note has been removed!", "All notes have been removed!", 
+                "Index provided is more than the number of notes!"],
+            "editnote": ["Syntax", "`=editnote [index] [text]`", "Alias", "'index' is the position of the note (e.g. 1, 2, 3, etc.)", 
+                "You do not have any notes!", "Index must be at least 1", "A note has been edited!", 
+                "Index provided is more than the number of notes!"],
+            "weather": ["Syntax:", "`=weather [measurement] [city]`", "`[measurement]` Arguments", "`metric` / `m`, `imperial` / `i`",
+                "Alias", "`[measurement]` argument is not valid!`]", "`[city]` argument is required!", 
+                "Sorry! Couldn't fetch weather data... `Error Code: {resp.status}`", "An error has occured! Make sure the city name is correct!",
+                "Current Weather"]
+        },
+
+        "MISC" : {
+            "placeholder": ["Title", "This is is the description.", "This is the footer.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"]
+        },
+
         "JAPANESE" : {
             
         },
 
         "MASTERONLY" : {
 
-        },
-
-        "MISC" : {
-            "placeholder": ["Title", "This is is the description.", "This is the footer.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"]
         }
 
     }
