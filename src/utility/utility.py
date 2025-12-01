@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()  # loads .env file into environment
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 
-from ..text_source.text_func import get_text, get_lang
+from ..text_source.text_func import get_text, get_text_neu, get_lang
 
 #database path
 folder = "utility"
@@ -53,7 +53,7 @@ def format(notes_list):
 #==============================================================
 
 def note_embed(ctx, all_notes):
-    text = get_text(ctx)["UTILITY"]["note_embed"]
+    text = get_text_neu(ctx)["UTILITY"]["note_embed"]
     name = ctx.author.name
 
     embed = discord.Embed(
@@ -68,7 +68,7 @@ def note_embed(ctx, all_notes):
 
 @commands.command(aliases=["n"])
 async def note(ctx, *, text:str=None):
-    text = get_text(ctx)["UTILITY"]["note"]
+    text = get_text_neu(ctx)["UTILITY"]["note"]
 
     if text is None:
         embed = discord.Embed(
@@ -104,7 +104,7 @@ async def note(ctx, *, text:str=None):
 
 @commands.command(aliases=["mn"])
 async def mynote(ctx):
-    text = get_text(ctx)["UTILITY"]["mynote"]
+    text = get_text_neu(ctx)["UTILITY"]["mynote"]
 
     db = load_db()
     notes = db.get(str(ctx.author.id))
@@ -123,7 +123,7 @@ async def mynote(ctx):
 
 @commands.command(aliases=["dn"])
 async def delnote(ctx, index:int=None):
-    text = get_text(ctx)["UTILITY"]["delnote"]
+    text = get_text_neu(ctx)["UTILITY"]["delnote"]
 
     if index is None:
         embed = discord.Embed(
@@ -178,7 +178,7 @@ async def delnote(ctx, index:int=None):
 
 @commands.command(aliases=["en"])
 async def editnote(ctx, index:int=None, *, text:str=None):
-    text = get_text(ctx)["UTILITY"]["editnote"]
+    text = get_text_neu(ctx)["UTILITY"]["editnote"]
 
     if (index is None) or (text is None):
         embed = discord.Embed(
@@ -228,7 +228,7 @@ async def editnote(ctx, index:int=None, *, text:str=None):
 
 @commands.command(aliases=["wt"])
 async def weather(ctx, measure:str=None, *, city:str=None):
-    text = get_text(ctx)["UTILITY"]["weather"]
+    text = get_text_neu(ctx)["UTILITY"]["weather"]
 
     embed = discord.Embed(
             title=text[0],
@@ -323,8 +323,6 @@ async def weather(ctx, measure:str=None, *, city:str=None):
 
 @commands.command(aliases=["lang"])
 async def language(ctx, code:str=None):
-    text = get_text(ctx)["UTILITY"]["note"]
-    
     if code is None:
         embed = discord.Embed(
             title="Syntax:",
