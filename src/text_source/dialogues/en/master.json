@@ -1,0 +1,29 @@
+{
+
+    "MAIN" : {
+        "command_error": "Master, the command does not exist! Use `=help` if you forgot my commands :>"
+    },
+
+    "HELP" : {
+        "help_text" : "What can I help you with, Master? ♡"
+    },
+
+    "INFO" : {
+        
+    },
+
+    "MISC" : {
+        "placeholder": ["Title", "This is is the description.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"],
+        "hello": "Hello, Master!",
+        "coin": ["heads", "tails", "Coin flipped! Master, you got {side}!"]
+    },
+
+    "JAPANESE" : {
+        
+    },
+
+    "MASTERONLY" : {
+
+    }
+
+}

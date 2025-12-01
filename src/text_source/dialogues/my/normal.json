@@ -1,0 +1,27 @@
+{
+
+    "MAIN" : {
+        "command_error": "Arahan ini tidak wujud! Gunakan `=help` jika kamu lupa arahan-arahan saya."
+    },
+
+    "HELP" : {
+        "help_text" : "Apa yang boleh saya bantu?"
+    },
+
+    "INFO" : {
+        
+    },
+
+    "JAPANESE" : {
+        
+    },
+
+    "MASTERONLY" : {
+
+    },
+
+    "MISC" : {
+        "hello": "Apa khabar!"
+    }
+
+}

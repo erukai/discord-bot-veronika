@@ -2,8 +2,8 @@ import os
 import json
 
 #get dialogue file
-def text_dict(lang):
-    textpath = os.path.join("src", "text_source", "dialogues", f"{lang}.json")
+def text_dict(lang, mode):
+    textpath = os.path.join("src", "text_source", "dialogues", lang, f"{mode}.json")
     with open(textpath, "r") as f:
         return json.load(f)
 
@@ -45,7 +45,7 @@ masterrole = "Veronika's Master"
 def get_mode(ctx, neutral:bool=False):
 
     if neutral:
-        mode = "neutral"
+        mode = "zero"
         return mode
 
     #if author is a master
@@ -69,19 +69,19 @@ def get_text(ctx):
     userlang = get_lang(ctx)
     usermode = get_mode(ctx)
 
-    textdict = text_dict(userlang) #get lang file first
-    text_mode = textdict.get(usermode) #then get dictionary {"HELP":{...},"INFO":{...},"JAPANESE":{...}, etc.}, either master or normal.
+    #get file by inputting lang and mode for path redirection (return a dictionary of text)
+    textdict = text_dict(userlang, usermode)
 
-    return text_mode
+    return textdict
 
 
 #call in commands with neutral texts
 def get_text_neu(ctx):
 
     userlang = get_lang(ctx)
-    mode_neutral = get_mode(ctx, True)
+    mode_zero = get_mode(ctx, True)
 
-    textdict = text_dict(userlang) #get lang file first
-    text_mode = textdict.get(mode_neutral) #then get dictionary {"HELP":{...},"INFO":{...},"JAPANESE":{...}, etc.}, either master or normal.
+    #get file by inputting lang and mode for path redirection (return a dictionary of text)
+    textdict = text_dict(userlang, mode_zero) #get lang file first
 
-    return text_mode
+    return textdict
