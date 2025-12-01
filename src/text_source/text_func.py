@@ -76,7 +76,7 @@ def get_text(ctx):
 
 
 #call in commands with neutral texts
-def get_text_neu(ctx):
+def get_text0(ctx):
 
     userlang = get_lang(ctx)
     mode_zero = get_mode(ctx, True)

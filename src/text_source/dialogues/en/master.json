@@ -1,7 +1,11 @@
 {
 
     "MAIN" : {
-        "command_error": "Master, the command does not exist! Use `=help` if you forgot my commands :>"
+        "on_command_error": {
+            "not_master": "Umm Master! I'm sorry but you cannot use this command! Where is your role, Master?",
+            "lack_permission": "Um, Master? For some reason I am informed that you lack moderation permissions... Is this a mistake?",
+            "command_not_exist": "Master, the command does not exist! Use `=help` if you forgot my commands :>"
+        }
     },
 
     "HELP" : {
@@ -13,9 +17,17 @@
     },
 
     "MISC" : {
-        "placeholder": ["Title", "This is is the description.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"],
         "hello": "Hello, Master!",
-        "coin": ["heads", "tails", "Coin flipped! Master, you got {side}!"]
+
+        "coin": {
+            "faces": {
+                "heads": "heads",
+                "tails": "tails"
+            },
+            "message": "Coin flipped! Master, you got {side}!"
+        },
+
+        "dice": "Master, Your dice rolled {roll}!"
     },
 
     "JAPANESE" : {

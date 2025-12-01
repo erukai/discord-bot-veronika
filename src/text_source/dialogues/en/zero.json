@@ -1,8 +1,6 @@
 {
     
-    "MAIN" : {
-        
-    },
+    "MAIN" : {},
 
     "HELP" : {
 
@@ -117,7 +115,32 @@
     },
 
     "MISC" : {
-        "placeholder": ["Title", "This is is the description.", "This is the footer.", "Author Section", "Sub-title1", "Sub-description1", "Sub-title2", "Sub-description2"]
+        "placeholder": {
+            "title": "Title", 
+            "desc": "This is is the description.",
+            "footer": "This is the footer.",
+            "author": "Author Section", 
+            "field1": {
+                "name": "Sub-title1",
+                "value": "Sub-description1"
+                },
+            "field2": {
+                "name": "Sub-title2",
+                "value": "Sub-description2"
+            }
+        },
+
+        "mic": {
+            "title": "Syntax", 
+            "desc": "`=mic [text]`",
+            "footer": "I will copy your message and remove yours!"
+        },
+
+        "parrot": {
+            "title": "Syntax", 
+            "desc": "`=parrot [text]`",
+            "footer": "I will copy your message!"
+        }
     },
 
     "JAPANESE" : {

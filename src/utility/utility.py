@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()  # loads .env file into environment
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 
-from ..text_source.text_func import get_text, get_text_neu, get_lang
+from ..text_source.text_func import get_text0, get_lang
 
 #database path
 folder = "utility"
@@ -53,7 +53,7 @@ def format(notes_list):
 #==============================================================
 
 def note_embed(ctx, all_notes):
-    text = get_text_neu(ctx)["UTILITY"]["note_embed"]
+    text = get_text0(ctx)["UTILITY"]["note_embed"]
 
     name = ctx.author.name
 
@@ -68,11 +68,11 @@ def note_embed(ctx, all_notes):
 
 
 @commands.command(aliases=["n"])
-async def note(ctx, *, text:str=None):
-    text = get_text_neu(ctx)["UTILITY"]["note"]
+async def note(ctx, *, note:str=None):
+    text = get_text0(ctx)["UTILITY"]["note"]
     text_msg = text['messages']
 
-    if text is None:
+    if note is None:
         embed = discord.Embed(
             title=text['title'],
             description=text['desc'],
@@ -86,7 +86,7 @@ async def note(ctx, *, text:str=None):
     note_db = load_db()
 
     #Update the entry. If key not exist, add to the dict and then update.
-    note_db.setdefault(user_id, []).append(text)
+    note_db.setdefault(user_id, []).append(note)
 
     # Write updated data to db
     write_db(note_db)
@@ -106,7 +106,7 @@ async def note(ctx, *, text:str=None):
 
 @commands.command(aliases=["mn"])
 async def mynote(ctx):
-    text = get_text_neu(ctx)["UTILITY"]["mynote"]
+    text = get_text0(ctx)["UTILITY"]["mynote"]
     text_err = text['errors']
 
     db = load_db()
@@ -126,7 +126,7 @@ async def mynote(ctx):
 
 @commands.command(aliases=["dn"])
 async def delnote(ctx, index:int=None):
-    text = get_text_neu(ctx)["UTILITY"]["delnote"]
+    text = get_text0(ctx)["UTILITY"]["delnote"]
     text_msg = text['messages']
     text_err = text['errors']
 
@@ -182,12 +182,12 @@ async def delnote(ctx, index:int=None):
     
 
 @commands.command(aliases=["en"])
-async def editnote(ctx, index:int=None, *, text:str=None):
-    text = get_text_neu(ctx)["UTILITY"]["editnote"]
+async def editnote(ctx, index:int=None, *, note:str=None):
+    text = get_text0(ctx)["UTILITY"]["editnote"]
     text_msg = text['messages']
     text_err = text['errors']
 
-    if (index is None) or (text is None):
+    if (index is None) or (note is None):
         embed = discord.Embed(
             title=text['title'],
             description=text['desc'],
@@ -214,7 +214,7 @@ async def editnote(ctx, index:int=None, *, text:str=None):
         return
 
     try:
-        notes[index] = text
+        notes[index] = note
         
         await ctx.send(text_msg['edited'])
 
@@ -235,7 +235,7 @@ async def editnote(ctx, index:int=None, *, text:str=None):
 
 @commands.command(aliases=["wt"])
 async def weather(ctx, measure:str=None, *, city:str=None):
-    text = get_text_neu(ctx)["UTILITY"]["weather"]
+    text = get_text0(ctx)["UTILITY"]["weather"]
     text_err = text['errors']
     text_head = text['header']
     text_content = text['content']
@@ -330,7 +330,7 @@ async def weather(ctx, measure:str=None, *, city:str=None):
 
 @commands.command(aliases=["lang"])
 async def language(ctx, code:str=None):
-    text = get_text_neu(ctx)["UTILITY"]["language"]
+    text = get_text0(ctx)["UTILITY"]["language"]
     text_err = text['errors']
     text_msg = text['messages']
 

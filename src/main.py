@@ -93,13 +93,14 @@ async def on_resumed():
 #catch missing roles / permissions errors
 @bot.event
 async def on_command_error(ctx, error):
-    if isinstance(error, commands.MissingRole) and error.missing_role == "Veronika's Master":
-        await ctx.send("You are not my Master. You cannot use this command.")
+    text = get_text(ctx)["MAIN"]["on_command_error"]
+
+    if isinstance(error, commands.MissingRole) and error.missing_role == MASTER_ROLE_ID:
+        await ctx.send(text['not_master'])
     elif isinstance(error, commands.MissingPermissions):
-        await ctx.send("I'm sorry, but you lack moderation permissions.")
+        await ctx.send(text['lack_permission'])
     elif isinstance(error, commands.CommandNotFound):
-        command_error = get_text(ctx)["MAIN"]["command_error"]
-        await ctx.send(command_error)
+        await ctx.send(text['command_not_exist'])
     else:
         raise error
 
