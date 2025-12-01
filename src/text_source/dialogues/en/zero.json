@@ -68,9 +68,9 @@
         "weather": {
             "title": "Syntax:",
             "desc": "`=weather [measurement] [city]`",
-            "alias": "Alias",
             "argument": "Arguments",
             "args_val": "`metric`/`m`, `imperial`/`i`",
+            "alias": "Alias",
 
             "errors": {
                 "invalid_args": "`[measurement]` argument is not valid!",
@@ -100,9 +100,9 @@
         "language": {
             "title": "Syntax:",
             "desc": "`=language [code]`",
-            "alias": "Alias",
             "languages": "Languages",
             "lang_val": "- English: `en`\n- Malay (Classical): `my`\n- T'kilab: `tk`",
+            "alias": "Alias",
             
             "errors": {
                 "invalid": "Language code is invalid!",
@@ -145,6 +145,71 @@
 
     "JAPANESE" : {
         
+    },
+
+    "DESIGNER" : {
+        "design": {
+            "title": "Syntax:",
+            "desc": "`=design [gender] [weightless (opt.)]`",
+
+            "gender": "`[gender]` Arguments",
+            "gen_args": "- `male` / `m`, `female` / `f`, `mix`, `random`",
+            "weightless": "`[weightless]` Arguments",
+            "weight_args": "- `True`, `False` (default = `False`)\n_(Case is not sensitive.)_",
+            "notes": "Notes",
+            "notes_val": "- `mix` = both male and female elements will be generated\n- `random` = either male or female elements will be generated",
+        
+            "errors": {
+                "invalid_weightless": "Argument `weightless` only accepts `true` or `false`!",
+                "invalid_gender": "The argument provided is not valid!"
+            },
+            
+            "messages": {
+
+            },
+
+            "header": {
+                "title": "Character Design",
+                "desc": "Gender: {gender.capitalize()}, Weightless: {weightless.capitalize() if isinstance(weightless, str) else weightless}",
+                "author": "{ctx.author.name}'s design",
+                "footer": "Follow up commands: =redesign, =alterdesign, =savedesign"
+            },
+
+            "content": {
+                
+                "names": {
+                    "color": "COLORS",
+                    "color_method": "COLOR METHODS",
+                    "hair": "HAIR",
+                    "bangs": "BANGS",
+                    "outfit": "OUTFIT",
+                    "textile": "TEXTILE",
+                    "accessory": "ACCESSORIES"
+                },
+
+                "values": {
+                    "color": "- eye color(s): {ec}\n- hair color(s): {hc}\n- outfit color(s): {oc}",
+                    "color_method1": "- eye color method: {ecm}\n- hair color method: {hcm}",
+                    "color_method2": "- eye color method: {ecm}\n- pupil shape: {s}\n- hair color method: {hcm}",
+                    "hair": "- hair length: {hl}\n- hair symmetry: {hsm}\n- hair style: {hs}\n- haircut: {hct}",
+                    "bangs": "- bangs length: {bl}\n- bangs position: {bp}\n- bangs style: {bs}",
+                    "outfit": "- headwear: {hw}\n- topwear: {tw}\n- armwear: {aw}\n- bottomwear: {bw}\n- footwear: {fw}",
+                    "textile": "- pattern: {p}\n- print: {pr}\n- exotic: {ex}",
+                    "accessory": "- hair ornament: {ah}\n- general: {ag}\n- top accessory: {at}\n- arm accessory: {aa}\n- bottom accessory: {ab}\n- foot accessory: {af}"
+                }
+                
+
+
+            }
+        },
+
+        "redesign": {
+            "title": "Syntax:",
+            "desc": "`=redesign [short attribute name]`",
+            "arguments": "Valid Arguments",
+            "args_val": "- color: `ec`, `ecm`, `s`, `hc`, `hcm`, `oc`\n- outfit: `hw`, `tw`, `aw`, `bw`, `fw`\n- accessory: `ah`, `ag`, `at`, `aa`, `ab`, `af`\n- hair: `hl`, `hsm`, `hs`, `hct`\n- bangs: `bl`, `bp`, `bs`\n- textile: `p`, `pr`, `ex`",
+            "alias": "Alias"
+        }
     },
 
     "MASTERONLY" : {

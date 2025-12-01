@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord.ext.commands.errors import ExtensionAlreadyLoaded
 from datetime import datetime, timezone, timedelta
 import os
 
@@ -78,7 +79,11 @@ async def on_ready():
 
     #Import commands from commands.Cog files
     for ext in ["src.games.roulette", "src.rpgdata.userprofile", "src.masteronly", "src.info", "src.help"]:
-        await bot.load_extension(ext)
+        try:
+            await bot.load_extension(ext)
+        except ExtensionAlreadyLoaded:
+            print("Extensions are already loaded.")
+
 
 @bot.event
 async def on_disconnect():
