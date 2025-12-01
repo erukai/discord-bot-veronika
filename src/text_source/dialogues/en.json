@@ -73,20 +73,108 @@
             
         },
 
-        "UTILITY" : {
-            "note_embed": ["Notes", "{author}'s Notes"],
-            "note": ["Syntax", "`=note [text]`", "Alias", "Use =mynote to view your notes.", "A note has been recorded!"],
-            "mynote": ["You do not have any notes!"],
-            "delnote": ["Syntax", "`=delnote [index]`", "Alias", "'index' is the position of the note (e.g. 1, 2, 3, etc.)", 
-                "You do not have any notes!", "Index must be at least 1", "A note has been removed!", "All notes have been removed!", 
-                "Index provided is more than the number of notes!"],
-            "editnote": ["Syntax", "`=editnote [index] [text]`", "Alias", "'index' is the position of the note (e.g. 1, 2, 3, etc.)", 
-                "You do not have any notes!", "Index must be at least 1", "A note has been edited!", 
-                "Index provided is more than the number of notes!"],
-            "weather": ["Syntax:", "`=weather [measurement] [city]`", "`[measurement]` Arguments", "`metric` / `m`, `imperial` / `i`",
-                "Alias", "`[measurement]` argument is not valid!`]", "`[city]` argument is required!", 
-                "Sorry! Couldn't fetch weather data... `Error Code: {resp.status}`", "An error has occured! Make sure the city name is correct!",
-                "Current Weather"]
+        "UTILITY": {
+            "note_embed": {
+                "title": "Notes",
+                "author": "{author}'s Notes"
+            },
+
+            "note": {
+                "title": "`=note [text]`",
+                "desc": "`=note [text]`",
+                "alias": "Alias",
+                "footer": "Use =mynote to view your notes.",
+                "messages": {
+                    "added": "A note has been recorded!"
+                }
+            },
+
+            "mynote": {
+                "errors": {
+                    "no_notes": "You do not have any notes!"
+                }
+            },
+
+            "delnote": {
+                "title": "Syntax:",
+                "desc": "`=delnote [index]`",
+                "alias": "Alias",
+                "footer": "'index' is the position of the note (e.g. 1, 2, 3, etc.)",
+
+                "errors": {
+                    "no_notes": "You do not have any notes!",
+                    "min_index": "Index must be at least 1",
+                    "too_high": "Index provided is more than the number of notes!"
+                },
+                "messages": {
+                    "removed": "A note has been removed!",
+                    "cleared": "All notes have been removed!"
+                }
+            },
+
+            "editnote": {
+                "title": "Syntax:",
+                "desc": "`=editnote [index] [text]`",
+                "alias": "Alias",
+                "footer": "'index' is the position of the note (e.g. 1, 2, 3, etc.)",
+
+                "errors": {
+                    "no_notes": "You do not have any notes!",
+                    "min_index": "Index must be at least 1",
+                    "too_high": "Index provided is more than the number of notes!"
+                },
+                "messages": {
+                    "edited": "A note has been edited!"
+                }
+            },
+
+            "weather": {
+                "title": "Syntax:",
+                "desc": "`=weather [measurement] [city]`",
+                "alias": "Alias",
+                "argument": "Arguments",
+                "args_val": "`metric`/`m`, `imperial`/`i`",
+
+                "errors": {
+                    "invalid_args": "`[measurement]` argument is not valid!",
+                    "missing_city": "`[city]` argument is required!",
+                    "fetch_failure": "Sorry! Couldn't fetch weather data... `Error Code: {resp}`"
+                },
+
+                "header": {
+                    "title": "Current Weather",
+                    "location": "Location",
+                    "heat": "Heat",
+                    "water": "Water",
+                    "wind": "Wind"
+                },
+                "content": {
+                    "location": "- City: {city_name}\n- Region: {region}\n- Country: {country}",
+                    "heat_m": "- Temperature: {temp_c}°C\n- Feels like: {feelslike_c}°C\n- Heat Index: {heat_c}°C\n- UV Index: {uv}",
+                    "water_m": "- Precipitation: {precip_mm}mm\n- Humidity: {humidity}%\n- Cloud: {cloud}%",
+                    "wind_m": "- Wind speed: {wind_kph}kph\n- Wind direction: {wind_dir}",
+                    "heat_i": "- Temperature: {temp_f}°F\n- Feels like: {feelslike_f}°F\n- Heat Index: {heat_f}°F\n- UV Index: {uv}",
+                    "water_i": "- Precipitation: {precip_in}in\n- Humidity: {humidity}%\n- Cloud: {cloud}%",
+                    "wind_i": "- Wind speed: {wind_mph}mph\n- Wind direction: {wind_dir}",
+                    "time": "Local time: {localtime}"
+                }
+            },
+
+            "language": {
+                "title": "Syntax:",
+                "desc": "`=language [code]`",
+                "alias": "Alias",
+                "languages": "Languages",
+                "lang_val": "- English: `en`\n- Malay (Classical): `my`\n- T'kilab: `tk`",
+                
+                "errors": {
+                    "invalid": "Language code is invalid!",
+                    "already": "Current language is already {lang_dict[code]}!"
+                },
+                "messages": {
+                    "changed": "Language has been changed to {lang_dict[code]}!"
+                }
+            }
         },
 
         "MISC" : {

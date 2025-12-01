@@ -54,13 +54,14 @@ def format(notes_list):
 
 def note_embed(ctx, all_notes):
     text = get_text_neu(ctx)["UTILITY"]["note_embed"]
+
     name = ctx.author.name
 
     embed = discord.Embed(
-        title=text[0],
+        title=text['title'],
         description=all_notes,
         color=discord.Color(0x4c3228))
-    embed.set_author(name=text[1].format(author=name))
+    embed.set_author(name=text['author'].format(author=name))
     embed.set_thumbnail(url=ctx.author.avatar)
 
     return embed
@@ -69,14 +70,15 @@ def note_embed(ctx, all_notes):
 @commands.command(aliases=["n"])
 async def note(ctx, *, text:str=None):
     text = get_text_neu(ctx)["UTILITY"]["note"]
+    text_msg = text['messages']
 
     if text is None:
         embed = discord.Embed(
-            title=text[0],
-            description=text[1],
+            title=text['title'],
+            description=text['desc'],
             color=discord.Color(0x4c3228))      
-        embed.add_field(name=text[2], value="`=n`")
-        embed.set_footer(text=text[3])
+        embed.add_field(name=text['alias'], value="`=n`")
+        embed.set_footer(text=text['footer'])
         await ctx.send(embed=embed)
         return
 
@@ -89,7 +91,7 @@ async def note(ctx, *, text:str=None):
     # Write updated data to db
     write_db(note_db)
 
-    await ctx.send(text[4])
+    await ctx.send(text_msg['added'])
 
     #--------------------------------
 
@@ -105,13 +107,14 @@ async def note(ctx, *, text:str=None):
 @commands.command(aliases=["mn"])
 async def mynote(ctx):
     text = get_text_neu(ctx)["UTILITY"]["mynote"]
+    text_err = text['errors']
 
     db = load_db()
     notes = db.get(str(ctx.author.id))
     
     #if list is falsy, i.e. empty
     if not notes:
-        await ctx.send(text[0])
+        await ctx.send(text_err['no_notes'])
         return
 
     #revise the index of all notes
@@ -124,14 +127,16 @@ async def mynote(ctx):
 @commands.command(aliases=["dn"])
 async def delnote(ctx, index:int=None):
     text = get_text_neu(ctx)["UTILITY"]["delnote"]
+    text_msg = text['messages']
+    text_err = text['errors']
 
     if index is None:
         embed = discord.Embed(
-            title=text[0],
-            description=text[1],
+            title=text['title'],
+            description=text['desc'],
             color=discord.Color(0x4c3228))      
-        embed.add_field(name=text[2], value="`=dn`")
-        embed.set_footer(text=text[3])
+        embed.add_field(name=text['alias'], value="`=dn`")
+        embed.set_footer(text=text['footer'])
         await ctx.send(embed=embed)
         return
     
@@ -142,19 +147,19 @@ async def delnote(ctx, index:int=None):
     
     #if list is falsy, i.e. empty or id is None
     if not notes:
-        await ctx.send(text[4])
+        await ctx.send(text_err['no_notes'])
         return
 
     if index > 0:
         index -= 1
     else:
-        await ctx.send(text[5])
+        await ctx.send(text_err['min_index'])
         return
 
     try:
         del notes[index]
         if notes:
-            await ctx.send(text[6])
+            await ctx.send(text_msg['removed'])
 
             db[user_id] = notes
             write_db(db)
@@ -169,24 +174,26 @@ async def delnote(ctx, index:int=None):
         else:
             db[user_id] = notes
             write_db(db)
-            await ctx.send(text[7])
+            await ctx.send(text_msg['cleared'])
 
     except IndexError:
-        await ctx.send(text[8])
+        await ctx.send(text_err["too_high"])
         return
     
 
 @commands.command(aliases=["en"])
 async def editnote(ctx, index:int=None, *, text:str=None):
     text = get_text_neu(ctx)["UTILITY"]["editnote"]
+    text_msg = text['messages']
+    text_err = text['errors']
 
     if (index is None) or (text is None):
         embed = discord.Embed(
-            title=text[0],
-            description=text[1],
+            title=text['title'],
+            description=text['desc'],
             color=discord.Color(0x4c3228))      
-        embed.add_field(name=text[2], value="`=en`")
-        embed.set_footer(text=text[3])
+        embed.add_field(name=text['alias'], value="`=en`")
+        embed.set_footer(text=text['footer'])
         await ctx.send(embed=embed)
         return
 
@@ -197,19 +204,19 @@ async def editnote(ctx, index:int=None, *, text:str=None):
     
     #if list is falsy, i.e. empty
     if not notes:
-        await ctx.send(text[4])
+        await ctx.send(text_err['no_notes'])
         return
 
     if index > 0:
         index -= 1
     else:
-        await ctx.send(text[5])
+        await ctx.send(text_err['min_index'])
         return
 
     try:
         notes[index] = text
         
-        await ctx.send(text[6])
+        await ctx.send(text_msg['edited'])
 
         db[user_id] = notes
         write_db(db)
@@ -222,32 +229,35 @@ async def editnote(ctx, index:int=None, *, text:str=None):
         await ctx.send(embed=embed)
 
     except IndexError:
-        await ctx.send(text[7])
+        await ctx.send(text_err['too_high'])
         return
 
 
 @commands.command(aliases=["wt"])
 async def weather(ctx, measure:str=None, *, city:str=None):
     text = get_text_neu(ctx)["UTILITY"]["weather"]
+    text_err = text['errors']
+    text_head = text['header']
+    text_content = text['content']
 
     embed = discord.Embed(
-            title=text[0],
-            description=text[1],
+            title=text['title'],
+            description=text['desc'],
             color=discord.Color(0x4c3228))
-    embed.add_field(name=text[2], value=text[3], inline=False)
-    embed.add_field(name=text[4], value="`=wt`", inline=False)
+    embed.add_field(name=text['argument'], value=text['args_val'], inline=False)
+    embed.add_field(name=text['alias'], value="`=wt`", inline=False)
 
     if measure is None:
         await ctx.send(embed=embed)
         return
 
     elif measure.lower() not in ["metric", "m", "imperial", "i"]:
-        await ctx.send(text[5])
+        await ctx.send(text_err['invalid_args'])
         await ctx.send(embed=embed)
         return
 
     elif city is None:
-        await ctx.send(text[6])
+        await ctx.send(text_err['missing_city'])
         await ctx.send(embed=embed)
         return
 
@@ -291,45 +301,46 @@ async def weather(ctx, measure:str=None, *, city:str=None):
                     heat_f = datanow['heatindex_f']
 
                     uv = datanow['uv']
-                
-                else:
-                    await ctx.send(text[7])
 
         except:
-            await ctx.send(text[8])
+            await ctx.send(text_err['fetch_failure'].format(resp=resp.status))
             return
         
     embed = discord.Embed(
-        title=text[9],
+        title=text_head['title'],
         description=condition,
         color=discord.Color(0x4c3228))
     
-    embed.add_field(name="Location", value=f"- City: {city_name}\n- Region: {region}\n- Country: {country}")
+    embed.add_field(name=text_head['location'], value=text_content['location'].format(city_name=city_name, region=region, country=country))
 
     if measure.lower() in ["metric", "m"]:
-        embed.add_field(name="Heat", value=f"- Temperature: {temp_c}°C\n- Feels like: {feelslike_c}°C\n- Heat Index: {heat_c}°C\n- UV Index: {uv}")
-        embed.add_field(name="Water", value=f"- Precipitation: {precip_mm}mm\n- Humidity: {humidity}%\n- Cloud: {cloud}%")
-        embed.add_field(name="Wind", value=f"- Wind speed: {wind_kph}kph\n- Wind direction: {wind_dir}")
+        embed.add_field(name=text_head['heat'], value=text_content['heat_m'].format(temp_c=temp_c, feelslike_c=feelslike_c, heat_c=heat_c, uv=uv))
+        embed.add_field(name=text_head['water'], value=text_content['water_m'].format(precip_mm=precip_mm, humidity=humidity, cloud=cloud))
+        embed.add_field(name=text_head['wind'], value=text_content['wind_m'].format(wind_kph=wind_kph, wind_dir=wind_dir))
 
     else:
-        embed.add_field(name="Heat", value=f"- Temperature: {temp_f}°F\n- Feels like: {feelslike_f}°F\n- Heat Index: {heat_f}°F\n- UV Index: {uv}")
-        embed.add_field(name="Water", value=f"- Precipitation: {precip_in}in\n- Humidity: {humidity}%\n- Cloud: {cloud}%")
-        embed.add_field(name="Wind", value=f"- Wind speed: {wind_mph}mph\n- Wind direction: {wind_dir}")
+        embed.add_field(name=text_head['heat'], value=text_content['heat_i'].format(temp_f=temp_f, feelslike_f=feelslike_f, heat_f=heat_f, uv=uv))
+        embed.add_field(name=text_head['water'], value=text_content['water_i'].format(precip_in=precip_in, humidity=humidity, cloud=cloud))
+        embed.add_field(name=text_head['wind'], value=text_content['wind_i'].format(wind_mph=wind_mph, wind_dir=wind_dir))
 
     embed.set_thumbnail(url=f"https:{condition_url}")
-    embed.set_footer(text=f"Local time: {localtime}")
+    embed.set_footer(text=text['time'].format(localtime=localtime))
     await ctx.send(embed=embed)
 
 
 @commands.command(aliases=["lang"])
 async def language(ctx, code:str=None):
+    text = get_text_neu(ctx)["UTILITY"]["language"]
+    text_err = text['errors']
+    text_msg = text['messages']
+
     if code is None:
         embed = discord.Embed(
-            title="Syntax:",
-            description="`=language [code]`",
+            title=text['title'],
+            description=text['desc'],
             color=discord.Color(0x4c3228))      
-        embed.add_field(name="Available Languages", value="- English: `en`\n- Malay (Classical): `my`\n- T'kilab: `tk`", inline=False)
-        embed.add_field(name="Alias", value="`=lang`")
+        embed.add_field(name=text['languages'], value=text['lang_val'], inline=False)
+        embed.add_field(name=text['alias'], value="`=lang`")
         await ctx.send(embed=embed)
         return
 
@@ -345,23 +356,25 @@ async def language(ctx, code:str=None):
 
     if code not in ['en', 'my', 'tk']:
         embed = discord.Embed(
-            title="Syntax:",
-            description="`=language [code]`",
+            title=text['title'],
+            description=text['desc'],
             color=discord.Color(0x4c3228))      
-        embed.add_field(name="Available Languages", value="- English: `en`\n- Malay: `my`\n- T'kilab: `tk`", inline=False)
-        embed.add_field(name="Alias", value="`=lang`")
+        embed.add_field(name=text['languages'], value=text['lang_val'], inline=False)
+        embed.add_field(name=text['alias'], value="`=lang`")
 
-        await ctx.send("Language code is not in my database!")
+        await ctx.send(text_err['invalid'])
         await ctx.send(embed=embed)
         return
 
     else:
+        lang_dict = dict(zip(['en', 'my', 'tk'], ['english', 'malay', 't\'kilab']))
+
         if userlang == code:
-            await ctx.send(f"Current language is already `English`!")
+            await ctx.send(text_err['already'].format(lang_dict=lang_dict, code=code))
             return
         else:
             new_userlang = code
-            await ctx.send(f"Language has been changed to `English`!")
+            await ctx.send(text_msg['changed'].format(lang_dict=lang_dict, code=code))
     
     # Add or update the entry
     langcheck[user_id] = new_userlang

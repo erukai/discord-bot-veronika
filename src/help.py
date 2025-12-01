@@ -17,7 +17,7 @@ categories = {
     ":purple_heart: Japanese": "`entry` • `update` • `list` ❌ • `dictionary` • `vocabquiz` • `wordquiz` ❌ • `kanjiquiz` ❌",
     ":grey_heart: Character Designer": "`design` • `redesign` ❌ • `alterdesign` ❌ • `savedesign` ❌ • `designlist` ❌",
     ":green_heart: Master Only": "`timerrun` • `timerstop` • `timercheck` • `timerreset` • `shutdown` • `embedtest` • `runtime` • `mode` • `modecheck`",
-    ":sparkles: Reactions": "`right?` • `i summon thee` • `you there` • `slave` • `sorry` • `good girl` • _`good night`_ • `clanker`",
+    ":sparkles: Reactions": "`right?` • `i summon thee` • `you there` • `slave` • `sorry` • `good girl` • `good night` • `clanker`",
 }
 
 aliases = {
