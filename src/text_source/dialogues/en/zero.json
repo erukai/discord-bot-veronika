@@ -15,7 +15,7 @@
             ":orange_heart: Game Profile": "`stats` • `register`",
             ":pink_heart: Sirius Program": "`orcus` • `orcustime` • `orcuscalc` • `earthcalc` ❌",
             ":purple_heart: Japanese": "`entry` • `update` • `list` ❌ • `dictionary` • `vocabquiz` • `wordquiz` ❌ • `kanjiquiz` ❌",
-            ":grey_heart: Character Designer": "`design` • `redesign` ❌ • `alterdesign` ❌ • `savedesign` ❌ • `designlist` ❌",
+            ":grey_heart: Character Designer": "`design` • `regendesign` • `redesign` • `alterdesign` ❌ • `savedesign` ❌ • `designlist` ❌ • `attributes`",
             ":green_heart: Master Only": "`timerrun` • `timerstop` • `timercheck` • `timerreset` • `shutdown` • `embedtest` • `runtime` • `mode` • `modecheck`",
             ":sparkles: Reactions": "`right?` • `i summon thee` • `you there` • `slave` • `sorry` • `good girl` • `good night` • `clanker`"
         },
@@ -29,7 +29,7 @@
             ":orange_heart: Game Profile": "_`stats`_ • `reg`",
             ":pink_heart: Sirius Program": "`or` • `ot` • `oc` • `ec` ❌",
             ":purple_heart: Japanese": "`kotoba` / `koto` • `up` • _`list`_ ❌ • `dict` • `vocab` / `vq` • `word` / `wq` ❌ • `kanji` / `kq` ❌",
-            ":grey_heart: Character Designer": "_`design`_ • `rdesign` ❌ • `adesign` ❌ • `sdesign` ❌ • `mydesign` ❌",
+            ":grey_heart: Character Designer": "_`design`_ • `rgdesign` / `regen` • `rdesign` / `re` • `adesign` / `alt` ❌ • `sdesign` ❌ • `mydesign` ❌ • `attr`",
             ":green_heart: Master Only": "`trun` • `ts` • `tc` • `tr` • `sd` • `et` • `rt` • `md` • `mc`",
             ":sparkles: Reactions:": "`correct?` • _`i summon thee`_ • _`you there`_ • _`slave`_ • `my bad` / `my fault` / `apologize` • _`good girl`_ • _`good night`_ • `clanka`"
         },
@@ -216,16 +216,18 @@
                     "redesign": "`redesign` _(alias: `rdesign`)_",
                     "alterdesign": "`alterdesign` _(alias: `adesign`)_",
                     "savedesign": "`savedesign` _(alias: `sdesign`)_",
-                    "designlist": "`designlist` _(alias: `mydesign`)_"
+                    "designlist": "`designlist` _(alias: `mydesign`)_",
+                    "attributes": "`attributes` _(alias: `attr`)_"
                 },
 
                 "values": {
                     "design": "Generate a random character design.\n`< =design [gender: m, f, mix, random] [weightless (optional): bool] >`",
                     "regendesign": "Regenerate a new character design using the previous arguments.\n`< =regendesign >`",
-                    "redesign": "Regenerate an element of the generated design.\n`< =redesign prefix:[element] >`",
+                    "redesign": "Regenerate an element of the generated design.\n`< =redesign [attribute] >`",
                     "alterdesign": "Manually alter an element of the generated design.\n`< =alterdesign prefix:[element] >`",
                     "savedesign": "Save a generated design.\n`< =savedesign [design_name] >`",
-                    "designlist": "Get a list of saved designs.\n`< =designlist >`"
+                    "designlist": "Get a list of saved designs.\n`< =designlist >`",
+                    "attributes": "Get a list of all attributes and prefixes for character design.\n`< =attributes >`"
                 }
             },
 
@@ -478,10 +480,174 @@
 
         "redesign": {
             "title": "Syntax:",
-            "desc": "`=redesign [short attribute name]`",
-            "arguments": "Valid Arguments",
+            "desc": "`=redesign [attribute prefixes]`",
+            "arguments": "Valid Prefixes",
             "args_val": "- color: `ec`, `ecm`, `s`, `hc`, `hcm`, `oc`\n- outfit: `hw`, `tw`, `aw`, `bw`, `fw`\n- accessory: `ah`, `ag`, `at`, `aa`, `ab`, `af`\n- hair: `hl`, `hsm`, `hs`, `hct`\n- bangs: `bl`, `bp`, `bs`\n- textile: `p`, `pr`, `ex`",
-            "alias": "Alias"            
+            "alias": "Alias",
+            "footer": "Use `=attributes` to get a full list of attributes and their corresponding prefixes.",
+            
+            "errors": {
+                "no_session": "You don't have a last session! Use `=design` to get a session.",
+                "prefix_unusable": "The attribute 'pupil shape' `[s]` is only for Eye Color Method 'patterned pupils'!"
+            },
+            "messages": {
+                "success": "Design regenerated for specific attributes!"
+            }
+        },
+
+        "alterdesign": {
+            "title": "Syntax:",
+            "desc": "`=alterdesign prefix:[attribute]`",
+            "arguments": "Valid Prefixes",
+            "args_val": "- color: `ec`, `ecm`, `s`, `hc`, `hcm`, `oc`\n- outfit: `hw`, `tw`, `aw`, `bw`, `fw`\n- accessory: `ah`, `ag`, `at`, `aa`, `ab`, `af`\n- hair: `hl`, `hsm`, `hs`, `hct`\n- bangs: `bl`, `bp`, `bs`\n- textile: `p`, `pr`, `ex`",
+            "alias": "Alias",
+            "footer": "Use `=elements [prefix]` to get a list of elements from an attribute.",
+            
+            "errors": {
+                "no_session": "You don't have a last session! Use `=design` to get a session.",
+                "prefix_unusable": "The attribute 'pupil shape' `[s]` is only for Eye Color Method 'patterned pupils'!"
+            },
+            "messages": {
+                "success": "Design regenerated for specific attributes!"
+            }
+        },
+
+        "savedesign": {
+            "title": "Syntax:",
+            "desc": "`=savedesign [design name]`",
+            "alias": "Alias",
+            "footer": "Use `=attributes` to get a full list of attributes and their corresponding prefixes.",
+            
+            "errors": {
+                "no_session": "You don't have a last session! Use `=design` to get a session.",
+                "prefix_unusable": "The attribute 'pupil shape' `[s]` is only for Eye Color Method 'patterned pupils'!"
+            },
+            "messages": {
+                "success": "Design `{design_name}` has been saved!"
+            }
+        }
+    },
+
+    "DESIGN_FIELDS" : {
+        "mapping": {
+            "dataset_mapping": {
+                "c": "colors",
+
+                "ecm": "eye_ColorMethods",
+                "s": "pupil_shapes", 
+                "hcm": "hair_ColorMethods",
+
+                "hl": "hair_length",
+                "hsm": "hair_symmetry",
+                "hs": "hair_styles",
+                "hct": "haircuts",
+
+                "bl": "bangs_length",
+                "bp": "bangs_position",
+                "bs": "bangs_styles",
+                
+                "hw": "headwear",
+                "tw": "topwear",
+                "aw": "armwear",
+                "bw": "bottomwear",
+                "fw": "footwear",
+
+                "p": "patterns",
+                "pr": "prints",
+                "ex": "exotic",
+
+                "ah": "hair_ornaments",
+                "ag": "general",
+                "at": "topwear",
+                "aa": "armwear",
+                "ab": "bottomwear",
+                "af": "footwear"
+            },
+
+            "attr_mapping": {
+                "c": "Color", 
+
+                "ecm": "Eye Color Method",
+                "s": "Pupil Shape", 
+                "hcm": "Hair Color Method",
+
+                "hl": "Hair Length",
+                "hsm": "Hair Symmetry",
+                "hs": "Hair Style",
+                "hct": "Haircut",
+
+                "bl": "Bangs Length",
+                "bp": "Bangs Position",
+                "bs": "Bangs Style",
+                
+                "hw": "Headwear",
+                "tw": "Topwear",
+                "aw": "Armwear",
+                "bw": "Bottomwear",
+                "fw": "Footwear",
+
+                "p": "Pattern",
+                "pr": "Print",
+                "ex": "Exotic",
+
+                "ah": "Hair Ornament",
+                "ag": "General Accessory",
+                "at": "Top Accessory",
+                "aa": "Arm Accessory",
+                "ab": "Bottom Accessory",
+                "af": "Foot Accessory"
+            }
+        },
+
+        "attributes": {
+            "header": {
+                "title": "Attributes and Prefixes",
+                "desc": "These prefixes can be used as arguments for `=redesign` and `=alterdesign`.",
+                "author": "Character Design",
+                "footer": "Use `=elements [prefix]` to get a list of elements from an attribute."
+            },
+
+            "content": {
+                "names": {
+                    "color": "COLORS",
+                    "color_method": "COLOR METHODS",
+                    "hair": "HAIR",
+                    "bangs": "BANGS",
+                    "outfit": "OUTFIT",
+                    "textile": "TEXTILE",
+                    "accessory": "ACCESSORIES"
+                },
+
+                "values": {
+                    "color": "- eye color `[ec]`\n- hair color `[hc]`\n- outfit color `[oc]`",
+                    "color_method": "- eye color method `[ecm]`\n- pupil shape `[s]`\n- hair color method `[hcm]`",
+                    "hair": "- hair length `[hl]`\n- hair symmetry `[hsm]`\n- hair style `[hs]`\n- haircut `[hct]`",
+                    "bangs": "- bangs length `[bl]`\n- bangs position `[bp]`\n- bangs style `[bs]`",
+                    "outfit": "- headwear `[hw]`\n- topwear `[tw]`\n- armwear `[aw]`\n- bottomwear `[bw]`\n- footwear `[fw]`",
+                    "textile": "- pattern `[p]`\n- print `[pr]`\n- exotic `[ex]`",
+                    "accessory": "- hair ornament `[ah]`\n- general `[ag]`\n- top accessory `[at]`\n- arm accessory `[aa]`\n- bottom accessory `[ab]`\n- foot accessory `[af]`"
+                }
+            }
+        },
+
+        "elements": {
+            "title": "Syntax:",
+            "desc": "`=elements [attribute prefix]`",
+            "arguments": "Valid Prefixes",
+            "args_val": "- color: `c` (color), `ecm`, `s`, `hcm`\n- outfit: `hw`, `tw`, `aw`, `bw`, `fw`\n- accessory: `ah`, `ag`, `at`, `aa`, `ab`, `af`\n- hair: `hl`, `hsm`, `hs`, `hct`\n- bangs: `bl`, `bp`, `bs`\n- textile: `p`, `pr`, `ex`",
+            "alias": "Alias",
+            "footer": "Use `=attributes` to get a full list of attributes and their corresponding prefixes.",
+
+            "header": {
+                "title": "{attr}: Elements",
+                "desc": "These elements can be used as arguments for `=alterdesign`.",
+                "author": "Character Design",
+                "footer": "`pupil shape` can only be used if Eye Color Method is 'patterned pupils'."
+            },
+
+            "errors": {
+                "no_attr": "The prefix provided does not exist!"
+            }
         }
     },
 

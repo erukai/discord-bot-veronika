@@ -4,50 +4,48 @@
         "weightless": null,
         "col": {
             "ec": [
-                "light green"
+                "light blue"
             ],
             "ecm": "plain eyes",
             "s": null,
             "hc": [
-                "light brown",
-                "magenta"
+                "purple"
             ],
-            "hcm": "streaked hair",
+            "hcm": "plain hair",
             "oc": [
-                "magenta",
-                "pink"
+                "indigo"
             ]
         },
         "fit": {
-            "hw": "goggles",
-            "tw": "hooded jacket",
-            "aw": "gloves",
-            "bw": null,
-            "fw": "long socks"
+            "hw": "capotain",
+            "tw": "crop top",
+            "aw": "fishnet gloves",
+            "bw": "shorts",
+            "fw": "socks"
         },
         "acc": {
-            "ah": "flower",
-            "ag": "lace",
-            "at": "ascot",
-            "aa": "armband",
-            "ab": "waist sash",
-            "af": null
+            "ah": "wings",
+            "ag": "bow",
+            "at": "cape",
+            "aa": "wrist cuff",
+            "ab": "garter belt",
+            "af": "ankle strap"
         },
         "hair": {
-            "hl": "medium",
+            "hl": "very long",
             "hsm": "symmetrical",
-            "hs": "hair flaps",
-            "hct": "mohawk"
+            "hs": "straight hair",
+            "hct": "inverted bob cut"
         },
         "bang": {
-            "bl": "medium",
-            "bp": "between eyes",
+            "bl": "long",
+            "bp": "covers both eyes",
             "bs": "pinned bangs"
         },
         "tex": {
-            "p": "plaid",
+            "p": "striped",
             "pr": null,
-            "ex": "ise katagami (japanese)"
+            "ex": "adinkra (ghanaian)"
         }
     },
     "726790716210020374": {

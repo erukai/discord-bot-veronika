@@ -19,8 +19,6 @@ os.makedirs(projectFolder, exist_ok=True)
 with open(db_path, "r") as f:
     ds = json.load(f)
 
-#print(ds["outfits"]["topwear"])
-
 #---------------------------------------------------------------------------------
 
 def gender_pick(chosen_gender):

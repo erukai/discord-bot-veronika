@@ -135,7 +135,7 @@ def design_embed(ctx):
     design = discord.Embed(title=design_text['title'], description=design_text['desc'], color=discord.Color.light_gray())
     design.set_footer(text=design_text['footer'])
 
-    for key in ["design", "regendesign", "redesign", "alterdesign", "savedesign", "designlist"]:
+    for key in ["design", "regendesign", "redesign", "alterdesign", "savedesign", "designlist", "attributes"]:
         design.add_field(
             name=design_text["fields"][key],
             value=design_text["values"][key],

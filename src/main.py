@@ -51,12 +51,12 @@ from .japanese.kotoba import entry, update, dictionary, vocabquiz, wordcount
 for cmd in [entry, update, dictionary, vocabquiz, wordcount]:
     bot.add_command(cmd)
 
-from .character.design import design, regendesign
-for cmd in [design, regendesign]:
+from .character.design import design, regendesign, redesign, alterdesign, savedesign
+for cmd in [design, regendesign, redesign, alterdesign, savedesign]:
     bot.add_command(cmd)
 
-from .character.element import designelements
-for cmd in [designelements]:
+from .character.fields import attributes, elements
+for cmd in [attributes, elements]:
     bot.add_command(cmd)
 
 #-----------------------------------------------------------
