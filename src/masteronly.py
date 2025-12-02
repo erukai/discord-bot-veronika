@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands, tasks
 import time
 import asyncio
+from contextlib import suppress
 
 import json
 import os
@@ -26,7 +27,9 @@ class Reactions(commands.Cog):
         mention = message.mentions
         send = message.channel.send
         
-        has_role = any(role.name == masterrole for role in message.author.roles)
+        with suppress(AttributeError): #ignore discord users / bots without roles
+            has_role = any(role.name == masterrole for role in message.author.roles)
+
         has_botname = any(word in content for word in ["veronika", "vero", "nika", "my maid"])
         mention_or_call = self.bot.user in mention or has_botname
 

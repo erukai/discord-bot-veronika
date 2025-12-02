@@ -3,7 +3,274 @@
     "MAIN" : {},
 
     "HELP" : {
+        "selections": ["🩵 Information", "❤️ Moderation", "🤍 Minigames", "🖤 Miscellaneous", "🤎 Utilities", "🧡 Game Profile",
+                "🩷 Sirius Program", "💜 Japanese", "🩶 Character Designer", "💚 Master Only", "Back to Help", "Back to Help: Alias"],
 
+        "categories": {
+            ":light_blue_heart: Information": "`aboutme` • `serverinfo` • `aboutuser` • `avatar`",
+            ":heart: Moderation": "`silence` • `unsilence` • `smite` • `banish` • `banishid` • `unbanish` • `burn` • `EXPLOOOSION`",
+            ":white_heart: Minigames": "`roulette` 🔄 • `rpg` ❌",
+            ":black_heart: Miscellaneous": "`placeholder` • `hello` • `parrot` • `mic` • `coin` • `dice` • `randnum`",
+            ":brown_heart: Utilities": "`note` • `mynote` • `editnote` • `delnote` • `weather` • `language`",
+            ":orange_heart: Game Profile": "`stats` • `register`",
+            ":pink_heart: Sirius Program": "`orcus` • `orcustime` • `orcuscalc` • `earthcalc` ❌",
+            ":purple_heart: Japanese": "`entry` • `update` • `list` ❌ • `dictionary` • `vocabquiz` • `wordquiz` ❌ • `kanjiquiz` ❌",
+            ":grey_heart: Character Designer": "`design` • `redesign` ❌ • `alterdesign` ❌ • `savedesign` ❌ • `designlist` ❌",
+            ":green_heart: Master Only": "`timerrun` • `timerstop` • `timercheck` • `timerreset` • `shutdown` • `embedtest` • `runtime` • `mode` • `modecheck`",
+            ":sparkles: Reactions": "`right?` • `i summon thee` • `you there` • `slave` • `sorry` • `good girl` • `good night` • `clanker`"
+        },
+
+        "aliases": {
+            ":light_blue_heart: Information": "`me` • `info` • `user` • `av`",
+            ":heart: Moderation": "`mute` • `unmute` • `kick` • `ban` • `banid` • `unban` • `purge` • `nuke` / `ex`",
+            ":white_heart: Minigames": "`gun` 🔄 • `game` ❌",
+            ":black_heart: Miscellaneous": "`ph` • _`hello`_ • _`parrot`_ • _`mic`_ • _`coin`_ • _`dice`_ • `rand`",
+            ":brown_heart: Utilities": "`n` • `mn` • `en` • `dn` • `wt` • `lang`",
+            ":orange_heart: Game Profile": "_`stats`_ • `reg`",
+            ":pink_heart: Sirius Program": "`or` • `ot` • `oc` • `ec` ❌",
+            ":purple_heart: Japanese": "`kotoba` / `koto` • `up` • _`list`_ ❌ • `dict` • `vocab` / `vq` • `word` / `wq` ❌ • `kanji` / `kq` ❌",
+            ":grey_heart: Character Designer": "_`design`_ • `rdesign` ❌ • `adesign` ❌ • `sdesign` ❌ • `mydesign` ❌",
+            ":green_heart: Master Only": "`trun` • `ts` • `tc` • `tr` • `sd` • `et` • `rt` • `md` • `mc`",
+            ":sparkles: Reactions:": "`correct?` • _`i summon thee`_ • _`you there`_ • _`slave`_ • `my bad` / `my fault` / `apologize` • _`good girl`_ • _`good night`_ • `clanka`"
+        },
+
+        "embeds": {
+            "info": {
+                "title": ":light_blue_heart: Information",
+                "desc": "Information about this server and its members.",
+
+                "fields": {
+                    "aboutme": "`aboutme` _(alias: `me`)_",
+                    "serverinfo": "`serverinfo` _(alias: `info`)_",
+                    "aboutuser": "`aboutuser` _(alias: `user`)_",
+                    "avatar": "`avatar` _(alias: `av`)_"
+                },
+
+                "values": {
+                    "aboutme": "Introduction to the bot.\n`< =aboutme >`",
+                    "serverinfo": "Get information about the server.\n`< =serverinfo >`",
+                    "aboutuser": "Get information about a user.\n`< =aboutuser >`",
+                    "avatar": "Get a user's avatar.\n`< =avatar >`"
+                }
+            },
+
+            "mod" : {
+                "title": ":heart: Moderation",
+                "desc": "Moderation tools for this server.",
+                "footer": "'opt.' stands for 'optional'.",
+
+                "fields": {
+                    "silence": "`silence` _(alias: `mute`)_",
+                    "unsilence": "`unsilence` _(alias: `unmute`)_",
+                    "smite": "`smite` _(alias: `kick`)_",
+                    "banish": "`banish` _(alias: `ban`)_",
+                    "banishid": "`banishid` _(alias: `banid`)_",
+                    "unbanish": "`unbanish` _(alias: `unban`)_",
+                    "burn": "`burn` _(alias: `purge`)_",
+                    "EXPLOOOSION": "`EXPLOOOSION` _(alias: `nuke`, `ex`)_"
+                },
+
+                "values": {
+                    "silence": "Mute a user within a set duration.\n`< =silence [@user] [duration: s, m, h, d] [reason (opt.)] >`",
+                    "unsilence": "Unmute a muted user.\n`< =unsilence [@user] >`",
+                    "smite": "Kick a user.\n`< =smite [@user] [reason (opt.)] >`",
+                    "banish": "Ban a user.\n`< =banish [@user] [reason (opt.)] >`",
+                    "banishid": "Ban a user by ID.\n`< =banish [user_id: int] [reason (opt.)] >`",
+                    "unbanish": "Unban a banned user.\n`< =unbanish [user_id: int] >`",
+                    "burn": "Delete past messages in a channel.\n`< =burn [amount: <= 100] >`",
+                    "EXPLOOOSION": "Delete ALL messages in a channel.\n`< =EXPLOOOSION >`"
+                }
+            },
+
+            "game" : {
+                "title": ":white_heart: Minigames",
+                "desc": "Minigames to play with others or alone.",
+
+                "fields": {
+                    "roulette": "`roulette` _(alias: `gun`)_",
+                    "rpg": "`rpg` :x: _(alias: `game`)_"
+                },
+
+                "values": {
+                    "roulette": "Start a round of Russian Roulette with the bot or another player.\n`< =roulette >`",
+                    "rpg": "Start or continue your RPG adventure.\n`< =rpg >`"
+                }
+            },
+
+            "misc" : {
+                "title": ":black_heart: Miscellaneous",
+                "desc": "Random commands to use.",
+
+                "fields": {
+                    "placeholder": "`placeholder` _(alias: `ph`)_",
+                    "hello": "`hello`",
+                    "parrot": "`parrot`",
+                    "mic": "`mic`",
+                    "coin": "`coin`",
+                    "dice": "`dice`",
+                    "randnum": "`randnum` _(alias: `rand`)_"
+                },
+
+                "values": {
+                    "placeholder": "Get a placeholder embed.\n`< =placeholder >`",
+                    "hello": "Greet the bot.\n`< =hello >`",
+                    "parrot": "Make the bot repeat your message.\n`< =parrot >`",
+                    "mic": "Make the bot repeat your message and delete the command.\n`< =mic >`",
+                    "coin": "Flip a coin.\n`< =coin >`",
+                    "dice": "Get a random number between 1 and 6.\n`< =dice >`",
+                    "randnum": "Get a random number between 1 and a number of your choice (`default=100`).\n`< =randnum [amount] >`"
+                }
+            },
+
+            "util" : {
+                "title": ":brown_heart: Utilities",
+                "desc": "Useful general tools.",
+
+                "fields": {
+                    "note": "`note` _(alias: `n`)_",
+                    "mynote": "`mynote` _(alias: `mn`)_",
+                    "editnote": "`editnote` _(alias: `en`)_",
+                    "delnote": "`delnote` _(alias: `dn`)_",
+                    "weather": "`weather` _(alias: `wt`)_",
+                    "language": "`language` _(alias: `lang`)_"
+                },
+
+                "values": {
+                    "note": "Add a note to your profile.\n`< =note [text] >`",
+                    "mynote": "View your notes.\n`< =mynote >`",
+                    "editnote": "Edit a note by index.\n`< =editnote [index] [text] >`",
+                    "delnote": "Delete a note by index.\n`< =delnote [index] >`",
+                    "weather": "Get the current weather of a city.\n`< =weather [measurement] [city] >`",
+                    "language": "Change the bot's language (user-specific).\n`< =language [code] >`"
+                }
+            },
+
+            "profile" : {
+                "title": ":orange_heart: Game Profile",
+                "desc": "Your character profile to play minigames.",
+
+                "fields": {
+                    "statistics": "`statistics` _(alias: `stats`)_",
+                    "register": "`register` _(alias: `reg`)_"
+                },
+
+                "values": {
+                    "statistics": "Check your character's statistics.\n`< =statistics >`",
+                    "register": "Register your character profile.\n`< =register >`"
+                }
+            },
+
+            "sirius" : {
+                "title": ":pink_heart: Sirius Program",
+                "desc": "Information or calculations of the Sirius world.",
+
+                "fields": {
+                    "orcus": "`orcus` _(alias: `or`)_",
+                    "orcustime": "`orcustime` _(alias: `ot`)_",
+                    "orcuscalc": "`orcuscalc` _(alias: `oc`)_",
+                    "earthcalc": "`earthcalc` :x: _(alias: `ec`)_"
+                },
+
+                "values": {
+                    "orcus": "Get the current time on Orcus and delete the command.\n`< =orcus >`",
+                    "orcustime": "Get the current time on Orcus.\n`< =orcustime >`",
+                    "orcuscalc": "Get the time on Orcus aligned to the set Earth date.\n`< =orcuscalc [day: <= 28~31] [month: <= 12] [year: >= 10 CE] >`\n_separators:_ ` ` `,` `;` `+` `|`",
+                    "earthcalc": "Get the time on Earth aligned to the set Orcus date.\n`< =earthcalc [day: <= 50 or 61~62] [month: <= 30] [year: >= 3235 SY] >`\n_separators:_ ` ` `,` `;` `+` `|`"
+                }
+            },
+
+            "jp" : {
+                "title": ":purple_heart: Japanese",
+                "desc": "Tools for Master's Japanese language study. Do not touch if you're not Master.",
+                "footer": "'opt.' stands for 'optional'.",
+
+                "fields": {
+                    "entry": "`entry` _(alias: `kotoba`, `koto`)_",
+                    "update": "`update` _(alias: `up`)_",
+                    "list": "`list` :x:",
+                    "dictionary": "`dictionary` _(alias: `dict`)_",
+                    "vocabquiz": "`vocabquiz` _(alias: `vocab`, `vq`)_",
+                    "wordquiz": "`wordquiz` :x: _(alias: `word`, `wq`)_",
+                    "kanjiquiz": "`kanjiquiz` :x: _(alias: `kanji`, `kq`)_"
+                },
+
+                "values": {
+                    "entry": "Store a Japanese word into the database (must contain kanji).\n`< =kotoba [word]; [romaji]; [part of speech]; [word meaning]; [kanji meaning]; [note (opt.)] >`\n_separators:_ `_` `;` `+` `|` `[new line]`",
+                    "update": "Update a data of a stored word.\n`< =update w:[word] p:[romaji] r:[role] m:[meaning] km:[kanji meaning] >`\n_prefixes:_ `w:` `p:` `r:` `m:` `km:`",
+                    "list": "Get a list of stored words with set filters.\n`< =list ~~~ >`",
+                    "dictionary": "Get the data of a word from the database.\n`< =dictionary [word] >`",
+                    "vocabquiz": "Start a session of vocabulary quiz.\n`< =vocabquiz [rounds (opt.)] [roles (opt.)] [kanji count (opt.)] >`\n_separators:_ ` ` `,` `;` | roles separator: `.`",
+                    "wordquiz": "Start a session of word quiz.\n`< =wordquiz ~~~ >`",
+                    "kanjiquiz": "Start a session of kanji quiz.\n`< =kanjiquiz ~~~ >`"
+                }
+            },
+
+            "design" : {
+                "title": ":grey_heart: Character Designer",
+                "desc": "Character design generator.",
+                "footer": "Get the full list of elements in Character Designer and their prefixes with `=designelements` (alias: `=edesign`)",
+
+                "fields": {
+                    "design": "`design`",
+                    "regendesign": "`regendesign` _(alias: `rgdesign`)_",
+                    "redesign": "`redesign` _(alias: `rdesign`)_",
+                    "alterdesign": "`alterdesign` _(alias: `adesign`)_",
+                    "savedesign": "`savedesign` _(alias: `sdesign`)_",
+                    "designlist": "`designlist` _(alias: `mydesign`)_"
+                },
+
+                "values": {
+                    "design": "Generate a random character design.\n`< =design [gender: m, f, mix, random] [weightless (optional): bool] >`",
+                    "regendesign": "Regenerate a new character design using the previous arguments.\n`< =regendesign >`",
+                    "redesign": "Regenerate an element of the generated design.\n`< =redesign prefix:[element] >`",
+                    "alterdesign": "Manually alter an element of the generated design.\n`< =alterdesign prefix:[element] >`",
+                    "savedesign": "Save a generated design.\n`< =savedesign [design_name] >`",
+                    "designlist": "Get a list of saved designs.\n`< =designlist >`"
+                }
+            },
+
+            "master" : {
+                "title": ":green_heart: Master Only",
+                "desc": "Tools and commands that are exclusive to Master.",
+                "footer": "'opt.' stands for 'optional'.",
+
+                "fields": {
+                    "timerrun": "`timerrun` _(alias: `trun`)_",
+                    "timercheck": "`timercheck` _(alias: `tc`)_",
+                    "timerstop": "`timerstop` _(alias: `ts`)_",
+                    "timerreset": "`timerreset` _(alias: `tr`)_",
+                    "shutdown": "`shutdown` _(alias: `sd`)_",
+                    "embedtest": "`embedtest` _(alias: `et`)_",
+                    "runtime": "`runtime` _(alias: `rt`)_",
+                    "mode": "`mode` _(alias: `md`)_",
+                    "modecheck": "`modecheck` _(alias: `mc`)_"
+                },
+
+                "values": {
+                    "timerrun": "Start a timer that loops every 14 minutes.\nThis command sends a reminder at the end of each loop.\n`< =timerrun >`",
+                    "timercheck": "Check the remaining time (in minutes) before the next loop.\n`< =timercheck >`",
+                    "timerstop": "Stop the running timer loop.\n`< =timerstop >`",
+                    "timerreset": "Reset the timer loop.\n`< =timerreset >`",
+                    "shutdown": "Shut the bot down. **[RESTRICTED BY MASTER ID]**\n`< =shutdown >`",
+                    "embedtest": "For embed testing.\n`< =embedtest >`",
+                    "runtime": "Check the bot's run time since startup.\n`< =runtime >`",
+                    "mode": "Switch between normal mode and master mode (determines Veronika's way of talking to Master)\n`< =mode [mode (opt.)] >`",
+                    "modecheck": "Check current mode between Master and Veronika.\n`< =modecheck >`"
+                }
+            },
+
+            "help1" : {
+                "desc": "_◈ Prefix: \"=\"_",
+                "author": "Commands List",
+                "footer": "Use =alhelp for command aliases"
+            },
+
+            "help2" : {
+                "desc": "_◈ Prefix: \"=\"_",
+                "author": "Commands List: Aliases",
+                "footer": "Use =help for full commands"
+            }
+        }
     },
 
     "INFO" : {
@@ -161,16 +428,16 @@
         
             "errors": {
                 "invalid_weightless": "Argument `weightless` only accepts `true` or `false`!",
-                "invalid_gender": "The argument provided is not valid!"
+                "invalid_gender": "The gender argument is not valid!"
             },
             
             "messages": {
-
+                "success": "Design generated!"
             },
 
             "header": {
                 "title": "Character Design",
-                "desc": "Gender: {gender.capitalize()}, Weightless: {weightless.capitalize() if isinstance(weightless, str) else weightless}",
+                "desc": "Gender: {gender}, Weightless: {weightless}",
                 "author": "{ctx.author.name}'s design",
                 "footer": "Follow up commands: =redesign, =alterdesign, =savedesign"
             },
@@ -197,9 +464,15 @@
                     "textile": "- pattern: {p}\n- print: {pr}\n- exotic: {ex}",
                     "accessory": "- hair ornament: {ah}\n- general: {ag}\n- top accessory: {at}\n- arm accessory: {aa}\n- bottom accessory: {ab}\n- foot accessory: {af}"
                 }
-                
+            }
+        },
 
-
+        "regendesign": {
+            "errors": {
+                "no_session": "You don't have a last session! Use `=design` to get a session."
+            },
+            "messages": {
+                "success": "Design regenerated using previous arguments!"
             }
         },
 
@@ -208,7 +481,7 @@
             "desc": "`=redesign [short attribute name]`",
             "arguments": "Valid Arguments",
             "args_val": "- color: `ec`, `ecm`, `s`, `hc`, `hcm`, `oc`\n- outfit: `hw`, `tw`, `aw`, `bw`, `fw`\n- accessory: `ah`, `ag`, `at`, `aa`, `ab`, `af`\n- hair: `hl`, `hsm`, `hs`, `hct`\n- bangs: `bl`, `bp`, `bs`\n- textile: `p`, `pr`, `ex`",
-            "alias": "Alias"
+            "alias": "Alias"            
         }
     },
 

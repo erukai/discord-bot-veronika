@@ -24,8 +24,8 @@ def write_sesh_db(session_data):
         json.dump(session_data, f, indent=4, ensure_ascii=False)
 
 #Calculate randomizer, while also update the session file
-def parse_session(w, weightless):
-    sesh_db = load_sesh_db
+def parse_session(gender, w, weightless, user_id):
+    sesh_db = load_sesh_db()
 
     col = colors(w) if weightless == "true" else colors()
     fit = outfit()
@@ -42,11 +42,14 @@ def parse_session(w, weightless):
     b = dict(zip(['bl', 'bp', 'bs'], bang))
     t = dict(zip(['p', 'pr', 'ex'], tex))
 
-    col = ('bla', 'babdabd', 'aduhhab')
-    new_sesh = {k: v for k, v in zip(['col', 'fit', 'acc', 'hair', 'bang', 'tex'], [c, f, a, h, b, t])}
+    sesh_db[user_id] = {
+        k: v for k, v in zip(
+            ['gender', 'weightless', 'col', 'fit', 'acc', 'hair', 'bang', 'tex'], [gender, weightless, c, f, a, h, b, t]
+        )
+    }
 
     #write to db
-    write_sesh_db(new_sesh)
+    write_sesh_db(sesh_db)
 
     return col, fit, acc, hairs, bang, tex
         
@@ -61,12 +64,7 @@ async def design(ctx, gender:str=None, weightless:str=None):
     text_head = text['header']
     text_content = text['content']
 
-    #-----------------------------------------------------------------------
-
-    # DESIGN
-
-    if isinstance(weightless, str):
-        weightless = weightless.lower()
+    user_id = str(ctx.author.id)
 
     if gender is None:
         embed = discord.Embed(
@@ -80,22 +78,13 @@ async def design(ctx, gender:str=None, weightless:str=None):
         await ctx.send(embed=embed)
         return
 
-    if weightless in (None, "false"):
-        pass
-    elif weightless == "true":
-        w = None
-    else:
-        embed = discord.Embed(
-            title=text['title'],
-            description=text['desc'],
-            color=discord.Color.light_gray()
-        )  
-        embed.add_field(name=text['gender'], value=text['gen_args'], inline=False)
-        embed.add_field(name=text['weightless'], value=text['weight_args'], inline=False)
-        embed.add_field(name=text['notes'], value=text['notes_val'])
-        
+    w = None #IMPORTANT: although w is assigned, it will only be used as an argument in randomizer if weightless = True
+
+    if isinstance(weightless, str):
+        weightless = weightless.lower()
+
+    if weightless not in (None, "false", "true"):        
         await ctx.send(text_err['invalid_weightless'])
-        await ctx.send(embed=embed)
         return
         
     chosen_gender = gender.lower()   
@@ -108,7 +97,7 @@ async def design(ctx, gender:str=None, weightless:str=None):
         return
 
     #get randomized attributes
-    col, fit, acc, hairs, bang, tex = parse_session(w)
+    col, fit, acc, hairs, bang, tex = parse_session(gender, w, weightless, user_id)
 
     ec, ecm, s, hc, hcm, oc = col
     hw, tw, aw, bw, fw = fit
@@ -121,7 +110,8 @@ async def design(ctx, gender:str=None, weightless:str=None):
 
     design_embed = discord.Embed(
         title=text_head['title'],
-        description=text_head['desc'].format(gender=gender, weightless=weightless),
+        description=text_head['desc'].format(gender=gender.capitalize(),
+            weightless=weightless.capitalize() if isinstance(weightless, str) else weightless),
         color=discord.Color.light_gray()
     )
     design_embed.set_author(name=text_head['author'].format(ctx=ctx))
@@ -138,101 +128,79 @@ async def design(ctx, gender:str=None, weightless:str=None):
     
     design_embed.set_footer(text=text_head['footer'])
 
+    await ctx.send(text_msg['success'])
     await ctx.send(embed=design_embed)
 
-    #-----------------------------------------------------------------------
-    # REDESIGN
 
-    # check: only accept messages from the command invoker, in same channel
-    def check(msg: discord.Message):
-        return msg.author.id == ctx.author.id and msg.channel.id == ctx.channel.id
+@commands.command(aliases=["rgdesign", "regen"])
+async def regendesign(ctx):
+    text = get_text0(ctx)["DESIGNER"]["regendesign"]
+    text_err = text['errors']
+    text_msg = text['messages']
 
-    while True:
-        rtext = get_text0(ctx)["DESIGNER"]["redesign"]
+    embed_text = get_text0(ctx)["DESIGNER"]["design"]
+    embed_head = embed_text['header']
+    embed_content = embed_text['content']
 
-        try:
-            reply: discord.Message = await ctx.bot.wait_for("message", timeout=60.0, check=check)
-        except asyncio.TimeoutError:
-            return
+    sesh_db = load_sesh_db()
+    user_id = str(ctx.author.id)
 
-        embed = discord.Embed(
-                title=rtext['title'],
-                description=rtext['desc'],
-                color=discord.Color.light_gray())  
-        embed.add_field(
-            name=rtext['arguments'], 
-            value=rtext['args_val'],
-            inline=False)
-        embed.add_field(name=rtext['alias'], value="`=rdesign`")
-
-        if reply.content in ["=redesign", "=rdesign", "=re"]:
-            await ctx.send(embed=embed)
-            return
-        
-        elif any(["=redesign", "=rdesign", "=re"]) in reply.content:
-            attributes = {
-                'col' : ['ec', 'ecm', 's', 'hc', 'hcm', 'oc'],
-                'fit' : ['hw', 'tw', 'aw', 'bw', 'fw'],
-                'acc' : ['ah', 'ag', 'at', 'aa', 'ab', 'af'],
-                'hair' : ['hl', 'hsm', 'hs', 'hct'],
-                'bang' : ['bl', 'bp', 'bs'],
-                'textile' : ['p', 'pr', 'ex']
-            }
-            all_attr = [item for sublist in attributes.values() for item in sublist]
-
-            copy = reply.content
-            for keyword in ["=redesign", "=rdesign"]:
-                copy = copy.replace(keyword, "")
-            message = copy.strip().split()
-
-            if any(w not in all_attr for w in message):
-                ctx.send("Invalid argument! Insert only element shortcuts")
-            else:
-
-                #new randomized attributes
-                col, fit, acc, hairs, bang, tex = parse_session(w)
-
-                ec, ecm, s, hc, hcm, oc = col
-                hw, tw, aw, bw, fw = fit
-                ah, ag, at, aa, ab, af = acc
-                hl, hsm, hs, hct = hairs
-                bl, bp, bs = bang
-                p, pr, ex = tex
-
-                ec, hc, oc = [", ".join(c) for c in [ec, hc, oc]]
-
-
-
-        elif reply.content == "=alterdesign":
-            break
-
-
-
-        elif reply.content == "=savedesign":
-
-            if gender is None:
-                embed = discord.Embed(
-                    title="Syntax:",
-                    description="`=design [gender]`",
-                    color=discord.Color.light_gray()
-                )  
-                embed.add_field(name="Valid Arguments", value="`male` / `m`, `female` / `f`, `mix`, `random`", inline=False)
-                embed.add_field(name="Notes", value="- `mix` = both male and female elements will be generated\n- `random` = either male or female elements will be generated")
-                await ctx.send(embed=embed)
-                return
-
-
-            break
-
-
-
-        else:
-            return
+    #if no sessions, send error
+    try:
+        user_sesh = sesh_db[user_id]
+    except KeyError:
+        await ctx.send(text_err['no_session'])
+        return
     
-'''@commands.command(aliases=["adesign"])
-async def alterdesign(self, ctx, *, args:str=None):
+    gender = user_sesh['gender']
+    weightless = user_sesh['weightless']
+    w = None #IMPORTANT: although w is assigned, it will only be used as an argument in randomizer if weightless = True
+    
+    #get randomized attributes
+    col, fit, acc, hairs, bang, tex = parse_session(gender, w, weightless, user_id)
+
+    ec, ecm, s, hc, hcm, oc = col
+    hw, tw, aw, bw, fw = fit
+    ah, ag, at, aa, ab, af = acc
+    hl, hsm, hs, hct = hairs
+    bl, bp, bs = bang
+    p, pr, ex = tex
+
+    ec, hc, oc = [", ".join(c) for c in [ec, hc, oc]]
+
+    design_embed = discord.Embed(
+        title=embed_head['title'],
+        description=embed_head['desc'].format(gender=gender.capitalize(),
+            weightless=weightless.capitalize() if isinstance(weightless, str) else weightless),
+        color=discord.Color.light_gray()
+    )
+    design_embed.set_author(name=embed_head['author'].format(ctx=ctx))
+
+    design_embed.add_field(name=embed_content['names']['color'], value=embed_content['values']['color'].format(ec=ec,hc=hc,oc=oc))
+    design_embed.add_field(name=embed_content['names']['color_method'], value=embed_content['values']['color_method1'].format(ecm=ecm,hcm=hcm) if not s else embed_content['values']['color_method2'].format(ecm=ecm,s=s,hcm=hcm))
+    design_embed.add_field(name=embed_content['names']['hair'], value=embed_content['values']['hair'].format(hl=hl,hsm=hsm,hs=hs,hct=hct))
+
+    design_embed.add_field(name=embed_content['names']['bangs'], value=embed_content['values']['bangs'].format(bl=bl,bp=bp,bs=bs))
+    design_embed.add_field(name=embed_content['names']['outfit'], value=embed_content['values']['outfit'].format(hw=hw,aw=aw,tw=tw,bw=bw,fw=fw))
+    design_embed.add_field(name=embed_content['names']['textile'], value=embed_content['values']['textile'].format(p=p,pr=pr,ex=ex))
+
+    design_embed.add_field(name=embed_content['names']['accessory'], value=embed_content['values']['accessory'].format(ah=ah,ag=ag,at=at,aa=aa,ab=ab,af=af))
+    
+    design_embed.set_footer(text=embed_head['footer'])
+
+    await ctx.send(text_msg['success'])
+    await ctx.send(embed=design_embed)
 
 
-@commands.command(aliases=["sdesign"])
-async def savedesign(self, ctx, *, name:str=None):'''
+
+'''@commands.command(aliases=["rdesign", "re"])
+async def redesign(ctx, *, args:str=None):
+
+
+@commands.command(aliases=["adesign", "alt"])
+async def alterdesign(ctx, *, args:str=None):
+
+
+@commands.command(aliases=["sdesign", "save"])
+async def savedesign(ctx, *, name:str=None):'''
 

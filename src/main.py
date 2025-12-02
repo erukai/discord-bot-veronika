@@ -51,8 +51,8 @@ from .japanese.kotoba import entry, update, dictionary, vocabquiz, wordcount
 for cmd in [entry, update, dictionary, vocabquiz, wordcount]:
     bot.add_command(cmd)
 
-from .character.design import design
-for cmd in [design]:
+from .character.design import design, regendesign
+for cmd in [design, regendesign]:
     bot.add_command(cmd)
 
 from .character.element import designelements
@@ -83,6 +83,7 @@ async def on_ready():
             await bot.load_extension(ext)
         except ExtensionAlreadyLoaded:
             print("Extensions are already loaded.")
+            break
 
 
 @bot.event

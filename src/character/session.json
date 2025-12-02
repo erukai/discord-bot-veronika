@@ -1,41 +1,103 @@
 {
-    "col" : {
-        "ec": "",
-        "ecm": "",
-        "s": "",
-        "hc": "",
-        "hcm": "",
-        "oc": ""
+    "1359316905969586338": {
+        "gender": "female",
+        "weightless": null,
+        "col": {
+            "ec": [
+                "light green"
+            ],
+            "ecm": "plain eyes",
+            "s": null,
+            "hc": [
+                "light brown",
+                "magenta"
+            ],
+            "hcm": "streaked hair",
+            "oc": [
+                "magenta",
+                "pink"
+            ]
+        },
+        "fit": {
+            "hw": "goggles",
+            "tw": "hooded jacket",
+            "aw": "gloves",
+            "bw": null,
+            "fw": "long socks"
+        },
+        "acc": {
+            "ah": "flower",
+            "ag": "lace",
+            "at": "ascot",
+            "aa": "armband",
+            "ab": "waist sash",
+            "af": null
+        },
+        "hair": {
+            "hl": "medium",
+            "hsm": "symmetrical",
+            "hs": "hair flaps",
+            "hct": "mohawk"
+        },
+        "bang": {
+            "bl": "medium",
+            "bp": "between eyes",
+            "bs": "pinned bangs"
+        },
+        "tex": {
+            "p": "plaid",
+            "pr": null,
+            "ex": "ise katagami (japanese)"
+        }
     },
-    "fit" : {
-        "hw": "",
-        "tw": "",
-        "aw": "",
-        "bw": "",
-        "fw": ""
-    },
-    "acc" : {
-        "ah": "",
-        "ag": "",
-        "at": "",
-        "aa": "",
-        "ab": "",
-        "af": ""
-    },
-    "hair" : {
-        "hl": "",
-        "hsm": "",
-        "hs": "",
-        "hct": ""
-    },
-    "bang" : {
-        "bl": "",
-        "bp": "",
-        "bs": ""
-    },
-    "tex" : {
-        "p": "",
-        "pr": "",
-        "ex": ""
+    "726790716210020374": {
+        "gender": "female",
+        "weightless": "false",
+        "col": {
+            "ec": [
+                "dark brown"
+            ],
+            "ecm": "plain eyes",
+            "s": null,
+            "hc": [
+                "light blue"
+            ],
+            "hcm": "plain hair",
+            "oc": [
+                "yellow",
+                "light brown"
+            ]
+        },
+        "fit": {
+            "hw": "veil",
+            "tw": "blouse",
+            "aw": "handsocks",
+            "bw": "shorts",
+            "fw": "high heels"
+        },
+        "acc": {
+            "ah": "hair stick",
+            "ag": "bow",
+            "at": "brooch",
+            "aa": "wrist cuff",
+            "ab": "legwear garter",
+            "af": "ankle strap"
+        },
+        "hair": {
+            "hl": "long",
+            "hsm": "asymmetrical",
+            "hs": "bow-shaped",
+            "hct": "mohawk"
+        },
+        "bang": {
+            "bl": "short",
+            "bp": "over one eye",
+            "bs": "crossed bangs"
+        },
+        "tex": {
+            "p": "checked",
+            "pr": null,
+            "ex": "acheik (burmese)"
+        }
     }
 }
