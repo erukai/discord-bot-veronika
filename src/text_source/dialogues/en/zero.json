@@ -417,6 +417,40 @@
     },
 
     "DESIGNER" : {
+        "filter_mapping": {
+            "colors": ["monochrome", "brown", "red", "yellow", "green", "blue", "cyan", "pink", "purple"],
+            "headwear": ["head_crown", "head_hat", "head_cover", "head_face"],
+            "head_hat": ["visor", "brim", "brimless", "military"],
+            "topwear": ["coats", "dresses", "jackets", "shirts"],
+            "hair_ornaments": ["animal_ornaments"]
+        },
+
+        "filter_embed": {
+            "header": {
+                "title": "Filter Arguments",
+                "desc": "These sub-categories can be filtered out for `=design`.",
+                "footer": "The sub-categories provided will be filtered throughout the entire session (design, regendesign, redesign, etc.)"
+            },
+
+            "content": {
+                "names": {
+                    "color": "COLORS",
+                    "headwear": "HEADWEAR",
+                    "head_hat": "head_hat",
+                    "topwear": "TOPWEAR",
+                    "hair_ornaments": "HAIR ORNAMENTS"
+                },
+
+                "values": {
+                    "color": "- monochrome\n- brown\n- red\n- yellow\n- green\n- blue\n- cyan\n- pink\n- purple",
+                    "headwear": "- head_crown\n- *[head_hat]*\n- head_cover\n- head_face",
+                    "head_hat": "- visor\n- brim\n- brimless\n- military",
+                    "topwear": "- coats\n- dresses (FEMALE-ONLY)\n- jackets\n- shirts",
+                    "hair_ornaments": "- animal_ornaments"
+                }
+            }
+        },
+
         "design": {
             "title": "Syntax:",
             "desc": "`=design [gender] [weightless (opt.)]`",

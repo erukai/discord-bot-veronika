@@ -10,14 +10,15 @@ from random import randrange as rdrange #(return random number from provided ran
 
 #---------------------------------------------------------------------------------
 
-projectFolder = os.path.abspath("../02 Character Designer/new ver")
+'''projectFolder = os.path.abspath("../02 Character Designer/new ver")
 sys.path.append(projectFolder)
 
 db_path = os.path.join(projectFolder, "datacenter", "dataset.json")
 os.makedirs(projectFolder, exist_ok=True)
 
+#CHANGED TO FILTERED_DB!!!!!!!!
 with open(db_path, "r") as f:
-    ds = json.load(f)
+    ds = json.load(f)'''
 
 #---------------------------------------------------------------------------------
 
@@ -35,7 +36,7 @@ def gender_pick(chosen_gender):
     return gender
 
 
-def coloring(count:int=1):
+def coloring(ds, count:int=1):
     
     color = copy.deepcopy(ds["colors"]) #copy color dictionary
     color_data = []
@@ -107,13 +108,13 @@ def roulette(attr):
 
 # [[COLORING]]
 
-def colors(weight=True):
+def colors(ds, weight=True):
 
-    if weight is None:
-        hair_weight = eye_weight = None
-    else:
+    if weight is True:
         hair_weight = ds["hair_meth_weight"]
         eye_weight = ds["eye_meth_weight"]
+    elif weight is None:
+        hair_weight = eye_weight = None
 
     hair_colorMeth = rng(ds["hair_ColorMethods"], weights=hair_weight, k=1)[0]
     eye_colorMeth = rng(ds["eye_ColorMethods"], weights=eye_weight, k=1)[0]
@@ -121,23 +122,23 @@ def colors(weight=True):
 
     #eyes two color or not
     if eye_colorMeth not in ["plain eyes", "patterned pupils"]:
-        eye_color = coloring(2)
+        eye_color = coloring(ds, 2)
 
     elif eye_colorMeth == "plain eyes":
-        eye_color = coloring()
+        eye_color = coloring(ds)
 
     elif eye_colorMeth == "patterned pupils":
-        eye_color = coloring()
+        eye_color = coloring(ds)
         shape = random(ds["pupil_shapes"])
 
     #hairs two color or not
     if hair_colorMeth != "plain hair":
-        hair_color = coloring(2)
+        hair_color = coloring(ds, 2)
     else:
-        hair_color = coloring()
+        hair_color = coloring(ds)
 
     #random outfit color amount
-    outfit_color = coloring(rdrange(1, 4))
+    outfit_color = coloring(ds, rdrange(1, 4))
 
     return eye_color, eye_colorMeth, shape, hair_color, hair_colorMeth, outfit_color
 
@@ -146,7 +147,7 @@ def colors(weight=True):
 
 # [[DATABASE ACCESS & ATTRIBUTE RANDOMIZER]]
 
-def outfit():
+def outfit(ds):
     # OUTFITS
     outfits = ds["outfits"] #five sub-attributes
 
@@ -166,7 +167,7 @@ def outfit():
 
 #-----------------------------------------------
 
-def accessory():
+def accessory(ds):
     # ACCESSORIES
 
     #Expects a LIST. Inside the list, expects a value of strings or a dictionary.
@@ -182,7 +183,11 @@ def accessory():
 
     return acc_hair, acc_general, acc_topwear, acc_armwear, acc_bottomwear, acc_footwear
 
-def hair(weight=ds["hair_symm_weight"]):
+def hair(ds, weight=True):
+
+    if weight is True:
+        weight = ds["hair_symm_weight"]
+
     # HAIRS
     hairlength = random(ds["hair_length"])
     hairsymmetry = rng(ds["hair_symmetry"], weights=weight, k=1)[0]
@@ -191,7 +196,7 @@ def hair(weight=ds["hair_symm_weight"]):
 
     return hairlength, hairsymmetry, hairstyle, haircut
 
-def bangs():
+def bangs(ds):
     # BANGS
     banglength = random(ds["bangs_length"])
     bangpos = random(ds["bangs_position"])
@@ -199,7 +204,7 @@ def bangs():
 
     return banglength, bangpos, bangstyle
 
-def textile():
+def textile(ds):
     # STYLES
     patterns = random(ds["patterns"])
     prints = random(ds["prints"])

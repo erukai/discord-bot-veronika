@@ -4,7 +4,9 @@ from discord.ext import commands
 from ..background.design_calc import gender_pick, colors, outfit, accessory, hair, bangs, textile
 from ..text_source.text_func import get_text0
 from operator import itemgetter
+from copy import deepcopy
 
+import sys
 import os
 import json
 
@@ -40,16 +42,73 @@ def write_saved_db(new_design):
 
 #=========================================================================
 
+def load_ds():
+    projectFolder = os.path.abspath("../02 Character Designer/new ver")
+    sys.path.append(projectFolder)
+
+    db_path = os.path.join(projectFolder, "datacenter", "dataset.json")
+    os.makedirs(projectFolder, exist_ok=True)
+
+    with open(db_path, "r") as f:
+        return json.load(f)
+
+
+def filter_ds(ctx, filter:str, valid_filters):
+    filter_map = get_text0(ctx)['DESIGNER']['filter_mapping']
+
+    #from the string argument, extract actual filters
+    given_filters = [word for word in filter.split() if word in valid_filters]
+    given_filters_dict = deepcopy(filter_map)
+    
+    #go through each key of filter map, see where current iterated filter is at the map.
+    for key, value in given_filters_dict.items():
+        given_filters_dict[key] = [item for item in value if item in given_filters] #only get filtered items
+    
+    #check if any key are FULL (i.e. remove all sub-categories).
+    #only hair_ornament & topwear can remove all.
+    #head_hat can be empty IF it's also removed from headwear.
+
+    for key in ["colors", "headwear"]:
+        if len(given_filters_dict[key]) == len(filter_map[key]):
+            raise Exception(f"Forbidden to remove all sub-categories for {key}.")
+        
+    if (len(given_filters_dict['head_hat']) == len(filter_map['head_hat'])) and "head_hat" not in given_filters_dict['headwear']:
+        raise Exception(f"Forbidden to remove all sub-categories for head_hat when head_hat is not removed.")
+
+    filtered_ds = deepcopy(load_ds())
+
+    # Note that all 'items' are keys in the dataset. That is, they are sub-categories, not the values.
+    paths = {
+        "colors": filtered_ds["colors"],
+        "headwear": filtered_ds["outfits"]["headwear"],
+        "head_hat": filtered_ds["outfits"]["headwear"]["head_hat"]
+    }
+    for key, target_dict in paths.items():
+        for item in given_filters_dict[key]:
+            del target_dict[item]
+
+    filtered_ds['outfits']['topwear'] = [x for x in filtered_ds['outfits']['topwear'] if "item" not in x] # reassign the list instead of removing the item.
+    filtered_ds['hair_ornaments'] = [x for x in filtered_ds['hair_ornaments'] if "item" not in x]
+
+    return filtered_ds
+
+
 #Calculate randomizer, while also update the session file
-def parse_session(gender, w, weightless, user_id):
+def parse_session(ctx, user_id, gender, w, weightless, filter, valid_filters):
+
+    if filter is not None:
+        ds = filter_ds(ctx, filter, valid_filters)
+    else:
+        ds = load_ds()
+
     sesh_db = load_sesh_db()
 
-    col = colors(w) if weightless == "true" else colors()
-    fit = outfit()
-    acc = accessory()
-    hairs = hair(w) if weightless == "true" else hair()
-    bang = bangs()
-    tex = textile()
+    col = colors(ds, w) if weightless == "true" else colors(ds)
+    fit = outfit(ds)
+    acc = accessory(ds)
+    hairs = hair(ds, w) if weightless == "true" else hair(ds)
+    bang = bangs(ds)
+    tex = textile(ds)
 
     #assign each key in db
     c = dict(zip(['ec', 'ecm', 's', 'hc', 'hcm', 'oc'], col))
@@ -73,7 +132,7 @@ def parse_session(gender, w, weightless, user_id):
 
 
 #Calculate randomizer, while also update the session file of attributes involved
-def parse_special_session(gender, w, weightless, user_id, given_prefixes):
+def parse_special_session(ctx, user_id, gender, w, weightless, filter, valid_filters, given_prefixes):
     sesh_db = load_sesh_db()
 
     #assign each key in dict. This won't be written to db. It will only be used as a reference for the loop below.
@@ -102,7 +161,7 @@ def parse_special_session(gender, w, weightless, user_id, given_prefixes):
 #=========================================================================
 
 @commands.command()
-async def design(ctx, gender:str=None, weightless:str=None):
+async def design(ctx, gender:str=None, weightless:str=None, *, filter:str=None):
     text = get_text0(ctx)["DESIGNER"]["design"]
     text_err = text['errors']
     text_msg = text['messages']
@@ -140,9 +199,31 @@ async def design(ctx, gender:str=None, weightless:str=None):
     else:
         await ctx.send(text_err['invalid_gender'])
         return
+    
+    filter_map = get_text0(ctx)["DESIGNER"]["filter_mapping"] #dict
+    valid_filter_args = [item for sublist in filter_map.values() for item in sublist]
+
+    filter_embed = get_text0(ctx)["DESIGNER"]["filter_embed"]
+    filter_head = filter_embed['header']
+    filter_content = filter_embed['content']
+
+    if filter is not None and not any(word in filter for word in valid_filter_args):
+        embed = discord.Embed(
+            title=filter_head['title'],
+            description=filter_head['desc'],
+            color=discord.Color.light_gray()
+        )
+        embed.set_footer(text=filter_head['footer'])
+
+        for key in ["color", "headwear", "head_hat", "topwear", "hair_ornaments"]:
+            embed.add_field(name=filter_content['names'][key], value=filter_content['values'][key])
+        await ctx.send(embed=embed)
+        return
+   
+    #----------------------------------------------------------------------------------
 
     #get randomized attributes
-    col, fit, acc, hairs, bang, tex = parse_session(gender, w, weightless, user_id)
+    col, fit, acc, hairs, bang, tex = parse_session(ctx, user_id, gender, w, weightless, filter, valid_filter_args)
 
     ec, ecm, s, hc, hcm, oc = col
     hw, tw, aw, bw, fw = fit
@@ -201,9 +282,13 @@ async def regendesign(ctx):
     gender = user_sesh['gender']
     weightless = user_sesh['weightless']
     w = None #IMPORTANT: although w is assigned, it will only be used as an argument in randomizer if weightless = True
+
+    filter_map = get_text0(ctx)["DESIGNER"]["filter_mapping"] #dict
+    valid_filter_args = [item for sublist in filter_map.values() for item in sublist]
+    filter = user_sesh['weightless'] #str, or None
     
     #get randomized attributes
-    col, fit, acc, hairs, bang, tex = parse_session(gender, w, weightless, user_id)
+    col, fit, acc, hairs, bang, tex = parse_session(ctx, user_id, gender, w, weightless, filter, valid_filter_args)
 
     ec, ecm, s, hc, hcm, oc = col
     hw, tw, aw, bw, fw = fit
@@ -294,9 +379,13 @@ async def redesign(ctx, *, args:str=None):
     gender = user_sesh['gender']
     weightless = user_sesh['weightless']
     w = None #IMPORTANT: although w is assigned, it will only be used as an argument in randomizer if weightless = True
+
+    filter_map = get_text0(ctx)["DESIGNER"]["filter_mapping"] #dict
+    valid_filter_args = [item for sublist in filter_map.values() for item in sublist]
+    filter = user_sesh['weightless'] #str, or None
     
     #randomize all attributes, but only update selected ones into session database
-    parse_special_session(gender, w, weightless, user_id, given_prefixes)
+    parse_special_session(ctx, user_id, gender, w, weightless, filter, valid_filter_args, given_prefixes)
 
     #for =redesign and =alterdesign, attribute values are taken directly from the updated session.
     sesh_db = load_sesh_db()
@@ -390,9 +479,13 @@ async def alterdesign(ctx, *, args:str=None):
     gender = user_sesh['gender']
     weightless = user_sesh['weightless']
     w = None #IMPORTANT: although w is assigned, it will only be used as an argument in randomizer if weightless = True
+
+    filter_map = get_text0(ctx)["DESIGNER"]["filter_mapping"] #dict
+    valid_filter_args = [item for sublist in filter_map.values() for item in sublist]
+    filter = user_sesh['weightless'] #str, or None
     
     #randomize all attributes, but only update selected ones into session database
-    parse_special_session(gender, w, weightless, user_id, given_prefixes)
+    parse_special_session(ctx, user_id, gender, w, weightless, filter, valid_filter_args, given_prefixes)
 
     #for =redesign and =alterdesign, attribute values are taken directly from the updated session.
     sesh_db = load_sesh_db()
@@ -433,8 +526,7 @@ async def alterdesign(ctx, *, args:str=None):
 
 
 
-
-
+#--------------------------------------------------------------------------------------
 
 @commands.command(aliases=["sdesign"])
 async def savedesign(ctx, *, name:str=None):

@@ -1,51 +1,55 @@
 {
     "1359316905969586338": {
         "gender": "female",
-        "weightless": null,
+        "weightless": "false",
+        "filters": "",
+
         "col": {
             "ec": [
-                "light blue"
+                "black",
+                "grey"
             ],
-            "ecm": "plain eyes",
+            "ecm": "two-tone eyes",
             "s": null,
             "hc": [
-                "purple"
+                "white",
+                "grey"
             ],
-            "hcm": "plain hair",
+            "hcm": "colored inner hair",
             "oc": [
-                "indigo"
+                "white"
             ]
         },
         "fit": {
-            "hw": "capotain",
-            "tw": "crop top",
-            "aw": "fishnet gloves",
-            "bw": "shorts",
-            "fw": "socks"
+            "hw": "bonnet",
+            "tw": "tube top",
+            "aw": "juliet sleeves",
+            "bw": null,
+            "fw": "pantyhose"
         },
         "acc": {
-            "ah": "wings",
-            "ag": "bow",
-            "at": "cape",
-            "aa": "wrist cuff",
-            "ab": "garter belt",
-            "af": "ankle strap"
+            "ah": "ribbon",
+            "ag": "bowtie",
+            "at": "suspended belts",
+            "aa": "sleeve cuff",
+            "ab": "belt",
+            "af": null
         },
         "hair": {
-            "hl": "very long",
+            "hl": "long",
             "hsm": "symmetrical",
-            "hs": "straight hair",
+            "hs": "ring-shaped",
             "hct": "inverted bob cut"
         },
         "bang": {
             "bl": "long",
-            "bp": "covers both eyes",
-            "bs": "pinned bangs"
+            "bp": "between eyes",
+            "bs": "braided bangs"
         },
         "tex": {
-            "p": "striped",
+            "p": "glen plaid",
             "pr": null,
-            "ex": "adinkra (ghanaian)"
+            "ex": "kilim (turkish)"
         }
     },
     "726790716210020374": {
